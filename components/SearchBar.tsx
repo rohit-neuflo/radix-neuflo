@@ -1,30 +1,37 @@
 import { styled } from "../stitches.config";
 
- const TextBar = styled("input", {
-  
+const TextBar = styled("input", {
+  height: "1.5rem",
   fontSize: "$sm",
+  padding: "0",
   //   backgroundColor: "red",
   borderRadius: "4px",
-  border: "1px solid #ccc",
-  //   border: "none",
+  // border: "1px solid #ccc",
+  border: "none",
   width: "100%",
   outline: "none",
   "&::placeholder": {
     color: "#aaa",
   },
-  "&:focus": {
-    border: "1px solid black",
-  },
 });
 
 const SearchBarRoot = styled("div", {
-    height:'3.5rem',
-    padding: '1rem'
-})
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "1.5rem",
+  padding: "1rem",
+  borderRadius: "12px",
+  // border: "1px solid none",
+  "&:active": {
+    outline: "2px solid $purple",
+  },
+});
 export default function SearchBar() {
-  return(
+  return (
     <SearchBarRoot>
-        <TextBar placeholder="Search"/>
+      {" "}
+      <TextBar placeholder="Search" />
     </SearchBarRoot>
   );
 }
