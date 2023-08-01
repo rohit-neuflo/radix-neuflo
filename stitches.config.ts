@@ -6,7 +6,7 @@ import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
 
-export const { styled, css,theme } = createStitches({
+export const { styled, css,theme ,getCssText,keyframes} = createStitches({
   theme: {
     colors: {
       primary:
@@ -54,7 +54,7 @@ export const { styled, css,theme } = createStitches({
     },
     fonts: {
       untitled: "Untitled Sans, apple-system, sans-serif",
-      mono: "Söhne Mono, menlo, monospace",
+      mono: "Shne Mono, menlo, monospace",
     },
     fontWeights: {
       regular: "400",

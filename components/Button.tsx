@@ -9,12 +9,12 @@ export const Button = styled("button", {
   justifyContent: "space-between",
   alignItems: "center",
   gap: "8px",
-  border:'none',
-  
-  
-  // _active: {
-  //   boxShadow: "0px 0px 0px 4px rgba(78, 70, 180, 0.2)",
-  // },
+  border: "none",
+  "&:active": {
+    boxShadow: "0px 0px 0px 4px rgba(78, 70, 180, 0.2)",
+    transition: "box-shadow 0.2s ease-in-out",
+  },
+
   variants: {
     size: {
       xs: {
