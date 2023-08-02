@@ -47,30 +47,37 @@ const SwitchThumb = styled(RadixSwitch.Thumb, {
   display: "block",
   backgroundColor: "white",
   borderRadius: "9999px",
-  // boxShadow:' 0px 0px 1px 0px rgba(0, 0, 0, 0.4),0px 6px 6px -6px rgba(0, 0, 0, 0.16)',
-
+  filter:
+    "drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.40)) drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.16))",
   transition: "transform 100ms",
-  transform: "translateX(3px)",
-  willChange: "transform",
+  
+
   variants: {
     size: {
       "2xs": {
         width: 12,
         height: 12,
-        '&[data-state="checked"]': { transform: "translateX(17px)" },
+        transform: "translateX(2px)",
+        willChange: "transform",
+        '&[data-state="checked"]': { transform: "translateX(18px)" },
       },
       xs: {
         width: 16,
         height: 16,
-        '&[data-state="checked"]': { transform: "translateX(25px)" },
+        '&[data-state="checked"]': { transform: "translateX(24px)" },
+        transform: "translateX(4px)",
+        willChange: "transform",
       },
       sm: {
         width: 24,
         height: 24,
-        '&[data-state="checked"]': { transform: "translateX(33px)" },
+        '&[data-state="checked"]': { transform: "translateX(32px)" },
+        transform: "translateX(4px)",
+        willChange: "transform",
       },
     },
   },
+
   defaultVariants: {
     size: "xs",
   },
