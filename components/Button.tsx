@@ -1,7 +1,8 @@
 import { styled } from "../stitches.config";
+import "@fontsource/poppins/600.css";
 
 export const Button = styled("button", {
-  fontWeight: "$semibold",
+  fontWeight: "600",
   fontStyle: "$normal",
   fontFamily: "Poppins",
   borderRadius: "8px",
@@ -59,9 +60,9 @@ export const Button = styled("button", {
         color: "$surfaceColor",
         stroke: "$primary-button-text-forced-white",
         backgroundColor: "$primary",
-        // _hover: {
-        //   bg: "primary-light",
-        // },
+        "&:hover": {
+          backgroundColor: "primary-light",
+        },
       },
       secondary: {
         backgroundColor: "$accent",
@@ -76,21 +77,21 @@ export const Button = styled("button", {
         border: "1px solid ",
         borderColor: "$secondary-body-text",
         stroke: "$primary-body-text",
-        // _hover: {
-        //   bg: "secondary",
-        //   border: "1px solid",
-        //   borderColor: "primary-body-text",
-        // },
+        '&:hover': {
+          backgroundColor: "$secondary",
+          border: "1px solid",
+          borderColor: "$primary-body-text",
+        },
       },
       ghost: {
         backgroundColor: "none",
         color: "$secondary-body-text",
         stroke: "$secondary-body-text",
-        // _hover: {
-        //   bg: "secondary",
-        //   color: "primary-body-text",
-        //   stroke: "primary-body-text",
-        // },
+        "&:hover": {
+          backgroundColor: "$secondary",
+          color: "$primary-body-text",
+          stroke: "$primary-body-text",
+        },
       },
     },
   },
