@@ -23,7 +23,6 @@ const slideLeftAndFade = keyframes({
 
 export const PortalStyle = {};
 const contentStyles = {
-//   position: "relative",
   fontFamily: "Poppins",
   backgroundColor: "white",
   borderRadius: 12,
