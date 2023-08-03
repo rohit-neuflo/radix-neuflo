@@ -75,4 +75,9 @@ export const { styled, css, theme, getCssText, keyframes, globalCss } =
       zIndices: {},
       transitions: {},
     },
+    media: {
+      bp1: '(min-width: 640px)',
+      bp2: '(min-width: 768px)',
+      bp3: '(min-width: 1024px)',
+    },
   });

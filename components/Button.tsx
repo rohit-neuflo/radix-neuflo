@@ -9,8 +9,8 @@ export const Button = styled("button", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  
   gap: "8px",
-  border: "none",
   "&:active": {
     boxShadow: "0px 0px 0px 4px rgba(78, 70, 180, 0.2)",
     transition: "box-shadow 0.2s ease-in-out",
@@ -59,6 +59,7 @@ export const Button = styled("button", {
       primary: {
         color: "$surfaceColor",
         stroke: "$primary-button-text-forced-white",
+        border: "none",
         backgroundColor: "$primary",
         "&:hover": {
           backgroundColor: "primary-light",
@@ -67,25 +68,26 @@ export const Button = styled("button", {
       secondary: {
         backgroundColor: "$accent",
         color: "$surfaceColor",
+        border: "none",
         stroke: "$primary-button-text-forced-white",
         "&:hover": {
           backgroundColor: "$accent",
         },
       },
       stroke: {
-        color: "$primary-body-text",
-        border: "1px solid ",
-        borderColor: "$secondary-body-text",
+        color: '$primary-body-text',
+        background: 'none',
+        border: '1px solid $secondary-body-text',
         stroke: "$primary-body-text",
         '&:hover': {
-          backgroundColor: "$secondary",
-          border: "1px solid",
-          borderColor: "$primary-body-text",
+          backgroundColor: '$secondary',
+          border: '1px solid $primary-body-text', 
         },
       },
       ghost: {
         backgroundColor: "none",
         color: "$secondary-body-text",
+        border: "none",
         stroke: "$secondary-body-text",
         "&:hover": {
           backgroundColor: "$secondary",
