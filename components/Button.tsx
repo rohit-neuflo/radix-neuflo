@@ -9,13 +9,15 @@ export const Button = styled("button", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  
+
   gap: "8px",
   "&:active": {
     boxShadow: "0px 0px 0px 4px rgba(78, 70, 180, 0.2)",
     transition: "box-shadow 0.2s ease-in-out",
   },
-
+  "&:hover": {
+    cursor: "pointer",
+  },
   variants: {
     size: {
       xs: {
@@ -75,13 +77,13 @@ export const Button = styled("button", {
         },
       },
       stroke: {
-        color: '$primary-body-text',
-        background: 'none',
-        border: '1px solid $secondary-body-text',
+        color: "$primary-body-text",
+        background: "none",
+        border: "1px solid $secondary-body-text",
         stroke: "$primary-body-text",
-        '&:hover': {
-          backgroundColor: '$secondary',
-          border: '1px solid $primary-body-text', 
+        "&:hover": {
+          backgroundColor: "$secondary",
+          border: "1px solid $primary-body-text",
         },
       },
       ghost: {

@@ -1,5 +1,11 @@
 import { createStitches } from "@stitches/react";
-import "@fontsource/poppins"
+import "@fontsource/poppins/200.css";
+import "@fontsource/poppins/300.css";
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+
 export const { styled, css, theme, getCssText, keyframes, globalCss } =
   createStitches({
     theme: {
@@ -50,6 +56,12 @@ export const { styled, css, theme, getCssText, keyframes, globalCss } =
       fonts: {
         untitled: "Poppins, apple-system, sans-serif",
         mono: "Poppins, menlo, monospace",
+      },
+      fontWeights:{
+        regular: "400",
+        heading: "500",
+        "semi-bold": "500",
+        bold: "600",
       },
       lineHeights: {},
       letterSpacings: {},
