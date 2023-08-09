@@ -4,9 +4,13 @@ import { Checkbox, TextLabel } from "../../components/Checkbox";
 
 function CheckboxPage() {
   return (
-    <div style={{ display: "flex" , alignItems:'center',}}>
-      <Checkbox id="name" />
-      <TextLabel>Label</TextLabel>
+    <div style={{ margin:"1rem", width: "100px" }}>
+      <Checkbox
+        variant="rounded"
+        id="name"
+        label="Label left"
+        labelSide="left"
+      />
     </div>
   );
 }
