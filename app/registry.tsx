@@ -14,5 +14,9 @@ export default function StitchesRegistry({ children }: { children: React.ReactNo
     }
   });
 
+  React.useEffect(() => {
+    (CSS as any).paintWorklet.addModule("squircle.min.js");
+  }, []);
+
   return <>{children}</>;
 }

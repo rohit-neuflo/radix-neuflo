@@ -52,7 +52,6 @@ const CheckboxRoot = styled(RadixCheckbox.Root, {
   background: "$surfaceColor",
   width: "16px",
   height: "16px",
-
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
