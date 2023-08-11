@@ -2,7 +2,7 @@ import { styled } from "../stitches.config";
 
 const SubTextarea = styled("textarea", {
   position: "absolute",
-  paddingTop: "12px",
+  paddingTop: "1.5rem",
   fontSize: "$md",
   borderRadius: "8px",
 });
@@ -14,20 +14,15 @@ const PlaceholderText = styled("span", {
   top: "5px",
   left: "5px",
   zIndex: 1,
-  border: "1px solid blue",
   pointerEvent: "none",
   fontSize: "$md",
-  //   border: "1px solid red",
 });
 
 const TextareaWrap = styled("div", {
   position: "relative",
-  //   width: "200px",
-  //   height: "200px",
-  //   border: "1px solid green",
   [`& ${SubTextarea}:focus + ${PlaceholderText}`]: {
     transition: "transform 0.3s",
-    transform: "scale(0.7) translate(-2px,-2px)",
+    transform: "scale(0.75) translate(-20px,-2px)",
     pointerEvent: "none",
   },
   [`& ${SubTextarea}:not(:focus) ~ ${PlaceholderText}`]: {

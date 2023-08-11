@@ -16,7 +16,8 @@ const RadioGroupItem = styled(RadixRadioGroup.Item, {
   border: "1px solid $secondary-body-text",
   borderRadius: "100%",
   "&[data-state=checked]": {
-    border: "1px solid $primary-light",
+    // border: "1px solid $primary-light",
+    border: "1px solid $primary",
   },
   "&:hover": {
     "&[data-state=unchecked]": {
@@ -63,11 +64,11 @@ const Radio = ({ id, value, labelSide = "right", label }: RadioProps) => (
       width: "100%",
     }}
   >
-      {labelSide === "left" && <TextLabel htmlFor={id}>{label}</TextLabel>}
-      <RadioGroupItem value={value} id={id}>
-        <RadioGroupIndicator />
-      </RadioGroupItem>
-      {labelSide === "right" && <TextLabel htmlFor={id}>{label}</TextLabel>}
+    {labelSide === "left" && <TextLabel htmlFor={id}>{label}</TextLabel>}
+    <RadioGroupItem value={value} id={id}>
+      <RadioGroupIndicator />
+    </RadioGroupItem>
+    {labelSide === "right" && <TextLabel htmlFor={id}>{label}</TextLabel>}
   </div>
 );
 

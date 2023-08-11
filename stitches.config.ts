@@ -10,8 +10,10 @@ export const { styled, css, theme, getCssText, keyframes, globalCss } =
   createStitches({
     theme: {
       colors: {
+        // primary:
+        //   "linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #47AAD4",
         primary:
-          "linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #47AAD4",
+          "rgb(56.8, 136, 169.6)",
         "primary-light": "#47AAD4",
         secondary: "#00000014",
         accent: "#66D2B8",
@@ -87,9 +89,9 @@ export const { styled, css, theme, getCssText, keyframes, globalCss } =
       zIndices: {},
       transitions: {},
     },
-    media: {
-      bp1: '(min-width: 640px)',
-      bp2: '(min-width: 768px)',
-      bp3: '(min-width: 1024px)',
-    },
+    // media: {
+    //   bp1: '(min-width: 640px)',
+    //   bp2: '(min-width: 768px)',
+    //   bp3: '(min-width: 1024px)',
+    // },
   });

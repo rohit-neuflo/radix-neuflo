@@ -64,7 +64,7 @@ export const Button = styled("button", {
         border: "none",
         backgroundColor: "$primary",
         "&:hover": {
-          backgroundColor: "primary-light",
+          backgroundColor: "$primary-light",
         },
       },
       secondary: {
@@ -101,6 +101,6 @@ export const Button = styled("button", {
   },
   defaultVariants: {
     size: "md",
-    variant: "secondary",
+    variant: "primary",
   },
 });
