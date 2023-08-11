@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { styled } from "../stitches.config";
-import { InputHTMLAttributes } from "react";
-import { VariantProps } from "@stitches/react";
 
 type StateVariant = "normal" | "error" | "disabled";
-interface InputProps {
-  type?: "text" | "password" | "number";
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  type?: "text" | "password" | "number" | "email";
   state?: StateVariant;
   placeholder?: string;
+  value?: number | string;
+  onChange?: (e: any) => void;
+  Size?: "md" | "lg" | "xl";
 }
 
 const InputContainer = styled("div", {
   margin: "0.25rem",
   position: "relative",
-  //   border:"1px solid red",
-  width: "100%",
-  overflow: "none",
+  width: "300px",
 });
 
 const InputBase = styled("input", {
   fontFamily: "Poppins",
   padding: "12px 16px",
   outline: "1px solid $border",
-  border: "none",
   borderRadius: "8px",
   width: "100%",
-  //   borderColor: "gray",
+  border: "none",
   variants: {
     inputState: {
       error: {
@@ -37,16 +35,25 @@ const InputBase = styled("input", {
       },
       normal: {},
     },
+    inputSize: {
+      md: {
+        padding: "8px 16px",
+      },
+      lg: {
+        padding: "12px 16px",
+      },
+      xl: {
+        padding: "16px 16px",
+      },
+    },
   },
   "&:focus": {
     border: "none",
     outline: "2px solid $primary",
   },
   defaultVariants: {
-    inputState: "normal", // Set the default inputState variant
+    inputState: "normal", 
   },
-
-  //   "&[state]": {},
 });
 
 const NumberInputContainer = styled("div", {
@@ -65,22 +72,21 @@ const Button = styled("button", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "32px",
+  width: "fit-content",
   height: "50%",
-  background: "#ccc",
+  background: "none",
   border: "none",
   cursor: "pointer",
-  fontSize: "$sm",
-  lineHeight: "1",
-  textAlign: "center",
   variants: {
     position: {
       top: {
         top: 0,
+        right: 0,
         transform: "translateY(0)",
       },
       bottom: {
         bottom: 0,
+        right: 0,
         transform: "translateY(0)",
       },
     },
@@ -91,11 +97,10 @@ const ArrowIcon = styled("span", {
   fontSize: "12px",
 });
 
-const Input: React.FC<InputProps> = ({
-  type = "text",
-  state = "normal",
-  ...props
-}) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+
+  const { type, state, Size, ...restProps } = props; 
+
   const [showPassword, setShowPassword] = useState(false);
   const [numberValue, setNumberValue] = useState<number | string>(0);
 
@@ -108,49 +113,117 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <InputContainer>
+    <InputContainer ref={ref}>
       {type === "password" ? (
-        <InputBase
-          type={showPassword ? "text" : "password"}
-          {...props}
-          inputState={state}
-        />
+        <NumberInputContainer>
+          <InputBase
+            ref={ref}
+            type={showPassword ? "text" : "password"}
+            {...restProps} // Use restProps here
+            inputState={state}
+            inputSize={Size}
+          />
+        </NumberInputContainer>
+      ) : type === "email" ? (
+        <NumberInputContainer>
+          <InputBase
+            ref={ref}
+            type={type}
+            {...restProps}
+            inputState={state}
+            inputSize={Size}
+          />
+        </NumberInputContainer>
       ) : type === "number" ? (
         <NumberInputContainer>
           <NumberInputBase
+            ref={ref}
             type="text"
             value={numberValue}
-            onChange={(e: any) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const inputValue = e.target.value;
               if (/^\d*$/.test(inputValue)) {
                 handleNumberChange(inputValue);
               }
             }}
-            {...props}
+            {...restProps} 
             inputState={state}
+            inputSize={Size}
           />
           <Button
+            className="top"
             type="button"
             position="top"
             onClick={() => handleNumberChange(Number(numberValue) + 1)}
+            css={{
+              borderTopRightRadius: "8px",
+              "&:hover": { backgroundColor: "$secondary" },
+            }}
           >
-            <ArrowIcon css={{}}>↑</ArrowIcon>
+            <ArrowIcon css={{}}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+              >
+                <path
+                  d="M2.625 7.6875L6 4.3125L9.375 7.6875"
+                  stroke="#999CA0"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </ArrowIcon>
           </Button>
           <Button
             type="button"
+            className="bottom"
             position="bottom"
             onClick={() => handleNumberChange(Number(numberValue) - 1)}
+            css={{
+              borderBottomRightRadius: "8px",
+              "&:hover": { backgroundColor: "$secondary" },
+            }}
           >
-            <ArrowIcon>↓</ArrowIcon>
+            <ArrowIcon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+              >
+                <path
+                  d="M9.375 4.3125L6 7.6875L2.625 4.3125"
+                  stroke="#999CA0"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </ArrowIcon>
           </Button>
         </NumberInputContainer>
       ) : (
-        <InputBase type={type} {...props} inputState={state} />
+        <NumberInputContainer>
+          <InputBase
+            ref={ref}
+            type={type}
+            {...restProps}
+            inputState={state}
+            inputSize={Size}
+          />
+        </NumberInputContainer>
       )}
       {type === "password" && (
         <Button
-          onClick={togglePasswordVisibility}
+          onClick={(e) => {
+            togglePasswordVisibility();
+            e.preventDefault();
+          }}
           css={{
+            marginRight: "0.1rem",
             fontFamily: "Poppins",
             position: "absolute",
             top: "50%",
@@ -159,6 +232,7 @@ const Input: React.FC<InputProps> = ({
             border: "none",
             background: "transparent",
             cursor: "pointer",
+            "&:hover": { backgroundColor: "none" },
           }}
         >
           {showPassword ? "Hide" : "Show"}
@@ -166,6 +240,6 @@ const Input: React.FC<InputProps> = ({
       )}
     </InputContainer>
   );
-};
+});
 
 export { Input };

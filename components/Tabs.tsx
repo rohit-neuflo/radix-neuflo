@@ -1,6 +1,7 @@
+import React from "react";
 import * as RadixTabs from "@radix-ui/react-tabs";
 import { styled } from "../stitches.config";
-
+import { motion } from "framer-motion";
 
 export const TabsList = styled(RadixTabs.List, {
   flexShrink: 0,
@@ -8,7 +9,7 @@ export const TabsList = styled(RadixTabs.List, {
   display: "flex",
 });
 
-export const TabItem = styled(RadixTabs.Trigger, {
+export const TabTrigger = styled(RadixTabs.Trigger, {
   flexShrink: 0,
   all: "unset",
   width: "fit-content",
@@ -28,6 +29,43 @@ export const TabItem = styled(RadixTabs.Trigger, {
     backgroundColor: "rgba(71, 170, 212, 0.0627)",
     color: "#47AAD4",
   },
+});
+
+const TabIndicator = styled(motion.div, {
+  position: "absolute",
+  inset: 0,
+  borderRadius: "16px",
+  backgroundColor: "$purple",
+});
+
+export const TabItem = React.forwardRef<
+  React.ElementRef<typeof TabTrigger>,
+  React.ComponentPropsWithoutRef<typeof TabTrigger>
+>((props, ref) => {
+  const { value, tabIndex, children, ...restProps } = props;
+  const [isActive, setIsActive] = React.useState<number | undefined>(tabIndex);
+
+  const handleTabClick = () => {
+    setIsActive(0);
+  };
+  return (
+    <div style={{ position: "relative" }}>
+      <TabTrigger
+        value={value}
+        ref={ref}
+        {...restProps}
+        onClick={handleTabClick}
+      >
+        {isActive === 0 && (
+          <TabIndicator
+            layoutId={`active-pill-${value}`}
+            transition={{ duration: 0.5 }}
+          />
+        )}
+        {children}
+      </TabTrigger>
+    </div>
+  );
 });
 
 export const TabContent = styled(RadixTabs.Content, {
@@ -50,22 +88,26 @@ export const Tabs = styled(RadixTabs.Root, {
     //   segments: {},
     // },
     size: {
-      sm: { [`& ${TabItem}`]: {
-        fontSize: "$sm",
-        padding: "0.25rem 0.5rem 0.25rem 0.5rem",
-        lineHeight: "1.5rem",
-        gap: "0.25rem",
-      } },
-      md: { [`& ${TabItem}`]: {
-        fontSize: "$sm",
-        padding: "0.5rem 0.75rem 0.5rem 0.75rem",
-        lineHeight: "1.5rem",
-        gap: "0.5rem",
-      } },
+      sm: {
+        [`& ${TabTrigger}`]: {
+          fontSize: "$sm",
+          padding: "0.25rem 0.5rem 0.25rem 0.5rem",
+          lineHeight: "1.5rem",
+          gap: "0.25rem",
+        },
+      },
+      md: {
+        [`& ${TabTrigger}`]: {
+          fontSize: "$sm",
+          padding: "0.5rem 0.75rem 0.5rem 0.75rem",
+          lineHeight: "1.5rem",
+          gap: "0.5rem",
+        },
+      },
     },
   },
   defaultVariants: {
     size: "md",
     // variant: "default",
-  }
+  },
 });

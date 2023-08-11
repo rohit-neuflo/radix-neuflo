@@ -18,10 +18,21 @@ function TabsPage() {
             <Lightbulb />
             $link
           </TabItem>
+          <TabItem value="3">
+            <Lightbulb />
+            $link
+          </TabItem>
+          <TabItem value="4">
+            <Lightbulb />
+            $link
+          </TabItem>
         </TabsList>
         <TabContent value="1">content 1</TabContent>
         <TabContent value="2">content 2</TabContent>
+        <TabContent value="3">content 3</TabContent>
+        <TabContent value="4">content 4</TabContent>
       </Tabs>
+      
       <Tabs defaultValue="1" size="sm">
         <TabsList>
           <TabItem value="1" >
