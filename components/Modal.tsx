@@ -1,7 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { styled, keyframes } from "../stitches.config";
 import React from "react";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Bell, CaretLeft, X } from "@phosphor-icons/react";
+import { Header } from "./Header";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
@@ -37,7 +38,6 @@ const IconButton = styled(Dialog.Close, {
   background: "none",
   "&:hover": { backgroundColor: "$border" },
   "&:focus": { boxShadow: `0 0 0 2px $border` },
-  
 });
 
 const RadixModalContainerStyles = {
@@ -53,7 +53,7 @@ const RadixModalContainerStyles = {
   width: "47rem",
   maxHeight: "85vh",
   animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
-
+  overflow: "none",
   display: "flex",
   flexDirection: "column",
   gap: "",
@@ -105,6 +105,13 @@ function ModalContainer({
 }
 
 function ModalHeader({ title }: { title?: string }) {
+  function DialogClose() {
+    return (
+      <ModalClose asChild>
+        <X />
+      </ModalClose>
+    );
+  }
   return (
     <div
       style={{
@@ -119,17 +126,9 @@ function ModalHeader({ title }: { title?: string }) {
           height: "50%",
           justifyContent: "space-between",
           flexGrow: 1,
-
-          padding: "0 1.5rem ",
         }}
       >
-        <ModalTitle>{title}</ModalTitle>
-
-        <ModalClose asChild>
-          <IconButton>
-            <Cross2Icon />
-          </IconButton>
-        </ModalClose>
+        <Header title={title} iconsRight={[{ Icon: DialogClose }]} />
       </div>
     </div>
   );

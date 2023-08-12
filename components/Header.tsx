@@ -10,7 +10,7 @@ const HeaderBase = styled("div", {
   alignItems: "center",
   justifyContent: "space-between",
   padding: "16px 24px",
-  width: "300px",
+  width: "100%",
   borderBottom: "none",
   flexDirection: "row",
   variants: {
