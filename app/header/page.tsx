@@ -1,8 +1,18 @@
 "use client";
 import React from "react";
-import { Bell, CaretLeft } from "@phosphor-icons/react";
-import { Header } from "@/components/Header"; // Make sure to import your Header component
+import { Bell, CaretLeft, X } from "@phosphor-icons/react";
+import { Header } from "@/components/Header";
+import * as Dialog from "@radix-ui/react-dialog";
 
+function DialogClose() {
+  return (
+    <Dialog.Root>
+      <Dialog.Close asChild>
+        <X />
+      </Dialog.Close>
+    </Dialog.Root>
+  );
+}
 export default function HeaderPage() {
   const handleBellClick = () => {
     console.log("Bell icon clicked!");
@@ -14,10 +24,7 @@ export default function HeaderPage() {
 
   return (
     <div>
-      <Header
-        title="Title"
-        iconsRight={[{ Icon: Bell, onClick: handleBellClick }]}
-      />
+      <Header title="Title" iconsRight={[{ Icon: DialogClose }]} />
       <Header
         title="Title"
         iconsLeft={[{ Icon: CaretLeft, onClick: handleCaretLeftClick }]}

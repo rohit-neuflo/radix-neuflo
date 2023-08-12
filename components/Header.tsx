@@ -4,17 +4,15 @@ import { IconProps } from "@phosphor-icons/react";
 
 const HeaderBase = styled("div", {
   fontFamily: "Poppins",
-  fontSize:"18px",
-  fontWeight:"600",
+  fontSize: "18px",
+  fontWeight: "600",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
   padding: "16px 24px",
-//   height:"64px",
   width: "300px",
   borderBottom: "none",
   flexDirection: "row",
-//   border:"1px solid red",
   variants: {
     divider: {
       true: {
@@ -44,8 +42,14 @@ const IconWrapper = styled("div", {
 
 type HeaderProps = {
   title?: string;
-  iconsLeft?: { Icon: React.ComponentType<IconProps>; onClick?: () => void }[];
-  iconsRight?: { Icon: React.ComponentType<IconProps>; onClick?: () => void }[];
+  iconsLeft?: {
+    Icon: React.ComponentType<IconProps> | React.ReactElement;
+    onClick?: () => void;
+  }[];
+  iconsRight?: {
+    Icon: React.ComponentType<IconProps> | React.ReactElement;
+    onClick?: () => void;
+  }[];
   divider?: boolean;
   iconPosition?: "left" | "right";
 };
@@ -61,17 +65,25 @@ const Header: React.FC<HeaderProps> = ({
     <HeaderBase divider={divider} iconPosition={iconPosition}>
       {iconsLeft && (
         <IconWrapper>
-          {iconsLeft.map((icon, index) => (
-            <icon.Icon key={index} size={16} onClick={icon.onClick} />
-          ))}
+          {iconsLeft.map((icon, index) =>
+            React.isValidElement(icon.Icon) ? (
+              <React.Fragment key={index}>{icon.Icon}</React.Fragment>
+            ) : (
+              <icon.Icon key={index} size={16} onClick={icon.onClick} />
+            )
+          )}
         </IconWrapper>
       )}
       {title && <Title>{title}</Title>}
       {iconsRight && (
         <IconWrapper>
-          {iconsRight.map((icon, index) => (
-            <icon.Icon key={index} size={16} onClick={icon.onClick} />
-          ))}
+          {iconsRight.map((icon, index) =>
+            React.isValidElement(icon.Icon) ? (
+              <React.Fragment key={index}>{icon.Icon}</React.Fragment>
+            ) : (
+              <icon.Icon key={index} size={16} onClick={icon.onClick} />
+            )
+          )}
         </IconWrapper>
       )}
     </HeaderBase>
