@@ -9,6 +9,7 @@ import {
   ModalFooter,
 } from "../../components/Modal";
 import { Button } from "../../components/Button";
+import { Input } from "@/components/Input";
 function ModalPage() {
   return (
     <div>
@@ -31,13 +32,22 @@ function ModalPage() {
           <ModalHeader title="Title" />
           <ModalContent>
           <form style={{display:'flex',flexDirection:'column',gap:'0.5rem', justifyContent:'center'}}>
-                    <input/>
-                    <input type='number'/>
+          <Input type="text" placeholder="Enter your name"/>
+              <Input type="number" />
             </form>
           </ModalContent>
-          <ModalFooter>
-            <Button variant="ghost" size="md">Label</Button>
-          </ModalFooter>
+          <ModalFooter
+    size="md"
+    variant="buttonLeftRight"
+    leftButtons={[
+      <Button variant="ghost" size="md">Label</Button>
+    ]}
+    rightButtons={[
+      <Button variant="stroke" size="md">Label</Button>,
+      <Button variant="primary" size="md">Label</Button>
+    ]}
+    divider
+  />
         </ModalContainer>
       </Modal>
     </div>

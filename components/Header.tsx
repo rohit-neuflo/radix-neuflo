@@ -69,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({
             React.isValidElement(icon.Icon) ? (
               <React.Fragment key={index}>{icon.Icon}</React.Fragment>
             ) : (
-              <icon.Icon key={index} size={16} onClick={icon.onClick} />
+              <icon.Icon  key={index} size={16} onClick={icon.onClick} />
             )
           )}
         </IconWrapper>
