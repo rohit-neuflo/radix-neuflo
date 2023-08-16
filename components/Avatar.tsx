@@ -1,11 +1,12 @@
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { styled } from "../stitches.config";
 
-type BadgePosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
-type BadgeStatus = 'online' | 'offline';
+type BadgePosition = "top-right" | "top-left" | "bottom-right" | "bottom-left";
+type BadgeStatus = "online" | "offline";
 
 type AvatarProps = {
-  sizes: "md" | "xs" | "sm" | "lg" | "xl" | "2xl";
+  variant?:"circle"|"square"
+  size: "md" | "xs" | "sm" | "lg" | "xl" | "2xl";
   badgePosition?: BadgePosition;
   badgeStatus?: BadgeStatus;
   src?: string;
@@ -13,179 +14,192 @@ type AvatarProps = {
 } & React.ComponentProps<typeof AvatarPrimitive.Root>;
 
 export const AvatarRoot = styled(AvatarPrimitive.Root, {
-  width: '40px', // Default width value
-  height: '40px', // Default height value
+  width: "40px", // Default width value
+  height: "40px",
+ // Default height value
 
   variants: {
-    sizes: {
+    size: {
       xs: {
-        width: '24px',
-        height: '24px',
+        width: "24px",
+        height: "24px",
+        fontSize:"10px"
       },
       sm: {
-        width: '32px',
-        height: '32px',
+        width: "32px",
+        height: "32px",
+        fontSize:"12px"
       },
       md: {
-        width: '40px',
-        height: '40px',
+        width: "40px",
+        height: "40px",
+        fontSize:"14px"
       },
       lg: {
-        width: '48px',
-        height: '48px',
+        width: "48px",
+        height: "48px",
+        fontSize:"16px"
       },
       xl: {
-        width: '56px',
-        height: '56px',
+        width: "56px",
+        height: "56px",
+        fontSize:"16px"
       },
-      '2xl': {
-        width: '64px',
-        height: '64px',
-      },
-    },
-    badgePosition: {
-      'top-right': {
-        top: '0',
-        right: '0',
-      },
-      'top-left': {
-        top: '0',
-        left: '0',
-      },
-      'bottom-right': {
-        bottom: '0',
-        right: '0',
-      },
-      'bottom-left': {
-        bottom: '0',
-        left: '0',
+      "2xl": {
+        width: "64px",
+        height: "64px",
+        fontSize:"20px"
       },
     },
-    badgeStatus: {
-      online: {
-        backgroundColor: 'green',
+    variant:{
+      circle:{
+        borderRadius:"100%"
       },
-      offline: {
-        backgroundColor: 'gray',
-      },
-    },
+      square:{
+        borderRadius:"8px"
+      }
+    }
   },
 
   defaultVariants: {
-    sizes: 'md',
+    size: "md",
+    variant:"circle"
   },
-  fontFamily: 'Poppins',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  verticalAlign: 'middle',
-  userSelect: 'none',
-  borderRadius: '100%',
-  backgroundColor: 'black',
-  position: 'relative',
+  fontFamily: "Poppins",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  verticalAlign: "middle",
+  userSelect: "none",
+  border:"0.5px solid $border",
+  position: "relative",
 });
 
 export const AvatarImage = styled(AvatarPrimitive.Image, {
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  borderRadius: 'inherit',
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  borderRadius: "inherit",
 });
 
 export const AvatarFallback = styled(AvatarPrimitive.Fallback, {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: 'white',
-  color: 'black',
-  fontSize: 15,
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  borderRadius:"inherit",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "white",
+  border:"none",
+  color: "black",
   lineHeight: 1,
   fontWeight: 500,
 });
 
-export const AvatarBadge = styled('div', {
-  all: 'unset',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '16px',
-  height: '16px',
-  position: 'absolute',
-  borderRadius: '100%',
-  color: 'white',
-  fontSize: '10px',
-  fontWeight: 'bold',
+export const AvatarBadge = styled("div", {
+  all: "unset",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "16px",
+  height: "16px",
+  position: "absolute",
+  border: "2px solid $border",
+  borderRadius: "100%",
+  color: "white",
+  fontSize: "10px",
+  fontWeight: "bold",
 
   variants: {
-    sizes: {
+    size: {
       xs: {
-        width: '8px',
-        height: '8px',
+        width: "4px",
+        height: "4px",
+
       },
       sm: {
-        width: '12px',
-        height: '12px',
+        width: "8px",
+        height: "8px",
       },
       md: {
-        width: '16px',
-        height: '16px',
+        width: "8px",
+        height: "8px",
       },
       lg: {
-        width: '17px',
-        height: '17px',
+        width: "12px",
+        height: "12px",
       },
       xl: {
-        width: '19px',
-        height: '19px',
+        width: "12px",
+        height: "12px",
       },
-      '2xl': {
-        width: '16px',
-        height: '16px',
+      "2xl": {
+        width: "12px",
+        height: "12px",
       },
     },
     badgePosition: {
-      'top-right': {
-        top: '0',
-        right: '0',
+      "top-right": {
+        top: "0",
+        right: "0",
       },
-      'top-left': {
-        top: '0',
-        left: '0',
+      "top-left": {
+        top: "0",
+        left: "0",
       },
-      'bottom-right': {
-        bottom: '0',
-        right: '0',
+      "bottom-right": {
+        bottom: "0",
+        right: "0",
       },
-      'bottom-left': {
-        bottom: '0',
-        left: '0',
+      "bottom-left": {
+        bottom: "0",
+        left: "0",
       },
     },
     badgeStatus: {
       online: {
-        backgroundColor: 'green',
+        backgroundColor: "$limegreen",
       },
       offline: {
-        backgroundColor: 'gray',
+        backgroundColor: "gray",
       },
     },
   },
 
   defaultVariants: {
-    sizes: 'md',
-    badgePosition: 'top-right',
-    badgeStatus: 'online',
+    size: "md",
+    badgePosition: "top-right",
+    badgeStatus: "online",
   },
 });
 
-export const Avatar = ({ badgePosition, badgeStatus, sizes, ...props }: AvatarProps) => {
+
+
+
+export const Avatar = ({
+  badgePosition,
+  badgeStatus,
+  size,
+  alt,
+  ...props
+}: AvatarProps) => {
+  const altInitials = alt
+    ?.split(' ')
+    .map((name:string) => name[0])
+    .join('');
   return (
-    <AvatarRoot sizes={sizes} {...props}>
-      {props.src ? <AvatarImage src={props.src} /> : <AvatarFallback>{props.alt}</AvatarFallback>}
+    <AvatarRoot size={size} {...props} variant={props.variant}>
+      {props.src ? (
+        <AvatarImage src={props.src} />
+      ) : (
+        <AvatarFallback>{altInitials}</AvatarFallback>
+      )}
       {badgeStatus && (
-        <AvatarBadge badgeStatus={badgeStatus} badgePosition={badgePosition} sizes={sizes} />
+        <AvatarBadge
+          badgeStatus={badgeStatus}
+          badgePosition={badgePosition}
+          size={size}
+        />
       )}
     </AvatarRoot>
   );

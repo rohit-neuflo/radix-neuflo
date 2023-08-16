@@ -6,13 +6,11 @@ import { Avatar } from '@/components/Avatar';
 
 const AvatarPage = () => (
   <>
-  <Avatar sizes="md" src="avatar-image-url" alt="User" badgePosition="top-right" badgeStatus="online" />
-  <Avatar sizes="lg" src="avatar-image-url" alt="User" badgePosition="top-right" badgeStatus="online" />
-  <Avatar sizes="xl" src="avatar-image-url" alt="User" badgePosition="top-right" badgeStatus="online" />
-  <Avatar sizes="2xl" src="avatar-image-url" alt="User" badgePosition="top-right" badgeStatus="online" />
-
-
-  </>
+  <Avatar size="md"  alt="David Nuges" badgePosition="top-right" badgeStatus="online" variant='square'/>
+  <Avatar size="lg"  alt="David Nuges" badgePosition="top-right" badgeStatus="online" />
+  <Avatar size="xl"  alt="David Nuges" badgePosition="top-right" badgeStatus="online" />
+  <Avatar size="2xl"  alt="David Nuges" badgePosition="top-right" badgeStatus="online" />
+</>
 );
 
 

@@ -1,6 +1,7 @@
 import React from "react";
 import * as RadixCheckbox from "@radix-ui/react-checkbox";
 import { styled } from "../stitches.config";
+import { Textlabel } from "./Textlabel";
 
 type variantTypes = "default" | "rounded" | "square";
 type labelSideTypes = "left" | "right";
@@ -24,7 +25,7 @@ const Checkbox = ({
       width: "100%",
     }}
   >
-    {labelSide === "left" && <TextLabel htmlFor={id}>{label}</TextLabel>}
+    {labelSide === "left" && <Textlabel htmlFor={id}>{label}</Textlabel>}
     <CheckboxRoot id={id} variant={variant}>
       <CheckboxIndicator variant={variant}>
         <svg
@@ -43,7 +44,7 @@ const Checkbox = ({
         </svg>
       </CheckboxIndicator>
     </CheckboxRoot>
-    {labelSide === "right" && <TextLabel htmlFor={id}>{label}</TextLabel>}
+    {labelSide === "right" && <Textlabel htmlFor={id}>{label}</Textlabel>}
   </div>
 );
 
@@ -108,16 +109,5 @@ const CheckboxIndicator = styled(RadixCheckbox.Indicator, {
   },
 });
 
-const TextLabel = styled("label", {
-  width: "fit-content",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  fontFamily: "Poppins",
-  fontSize: "14px",
-  fontStyle: "normal",
-  fontWeight: "400",
-  lineHeight: "24px",
-});
 
-export { Checkbox, TextLabel };
+export { Checkbox };
