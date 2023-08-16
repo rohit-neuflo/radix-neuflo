@@ -9,7 +9,7 @@ export const Button = styled("button", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-
+  margin: "0.25rem",
   gap: "8px",
   "&:active": {
     boxShadow: "0px 0px 0px 4px rgba(78, 70, 180, 0.2)",

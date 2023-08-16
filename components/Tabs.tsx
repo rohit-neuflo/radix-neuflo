@@ -90,7 +90,7 @@ export const Tabs = styled(RadixTabs.Root, {
   variants: {
     variant: {
       default: {
-        [`& ${TabItem}`]: {
+        [`& > ${TabsList} > ${TabItem}`]: {
           backgroundColor: "$surfaceColor",
           '&[data-state="active"]': {
             "&:after": {
@@ -114,7 +114,7 @@ export const Tabs = styled(RadixTabs.Root, {
         },
       },
       pills: {
-        [`& ${TabItem}`]: {
+        [`& > ${TabsList} > ${TabItem}`]: {
           '&[data-state="active"]': {
             backgroundColor: "$primary",
             color: "white",
@@ -130,12 +130,12 @@ export const Tabs = styled(RadixTabs.Root, {
         },
       },
       segments: {
-        [`& ${TabsList}`]: {
+        [`& > ${TabsList}`]: {
           backgroundColor: "$border",
           borderRadius: "8px",
           padding: "4px",
         },
-        [`& ${TabItem}`]: {
+        [`& > ${TabsList} > ${TabItem}`]: {
           '&[data-state="active"]': {
             backgroundColor: "$surfaceColor",
             color: "$primary-body-text",
@@ -151,7 +151,7 @@ export const Tabs = styled(RadixTabs.Root, {
     },
     size: {
       sm: {
-        [`& ${TabItem}`]: {
+        [`& > ${TabsList} > ${TabItem}`]: {
           fontSize: "$sm",
           padding: "0.25rem 0.5rem 0.25rem 0.5rem",
           lineHeight: "1.5rem",
@@ -159,7 +159,7 @@ export const Tabs = styled(RadixTabs.Root, {
         },
       },
       md: {
-        [`& ${TabItem}`]: {
+        [`& > ${TabsList} > ${TabItem}`]: {
           fontSize: "$sm",
           padding: "0.5rem 0.75rem 0.5rem 0.75rem",
           lineHeight: "1.5rem",

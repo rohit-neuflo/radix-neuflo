@@ -7,7 +7,7 @@ import React from "react";
 function TabsPage() {
   return (
     <div>
-      <Tabs defaultValue="1">
+      <Tabs defaultValue="1" variant="segments">
         <TabsList>
           <TabItem value="1">
             <Lightbulb />
