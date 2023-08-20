@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { Checkbox, TextLabel } from "../../components/Checkbox";
+import { Checkbox } from "../../components/Checkbox";
+
 
 function CheckboxPage() {
   return (
