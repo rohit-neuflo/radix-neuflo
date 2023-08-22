@@ -10,6 +10,7 @@ export const Button = styled("button", {
   justifyContent: "space-between",
   alignItems: "center",
   margin: "0.25rem",
+  transition: "background-color 200ms, color 100ms, border 100ms, stroke 100ms",
   gap: "8px",
   "&:active": {
     boxShadow: "0px 0px 0px 4px rgba(78, 70, 180, 0.2)",
