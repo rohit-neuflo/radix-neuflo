@@ -14,6 +14,7 @@ const Chip = styled(RadixToggleGroup.Item, {
   fontFamily: "Poppins",
   borderRadius: "8px",
   border: "2px solid transparent",
+  transition: "background-color 200ms, color 100ms, border 100ms, stroke 100ms",
   variants: {
     size: {
       sm: {

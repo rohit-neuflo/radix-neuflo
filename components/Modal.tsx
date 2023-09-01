@@ -3,7 +3,7 @@ import { styled, keyframes } from "../stitches.config";
 import React from "react";
 import { Bell, CaretLeft, X } from "@phosphor-icons/react";
 import { Header } from "./Header";
-import { Footer } from '@/components/Footer'
+import { Footer } from "@/components/Footer";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
@@ -90,11 +90,7 @@ const ModalClose = styled(Dialog.Close, {
 const ModalTrigger = styled(Dialog.Trigger);
 const Modal = styled(Dialog.Root);
 
-function ModalContainer({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function ModalContainer({ children }: { children: React.ReactNode }) {
   return (
     <ModalPortal>
       <ModalOverlay />
@@ -156,7 +152,7 @@ function ModalHeader({ title }: { title?: string }) {
 //   );
 // }
 
-const ModalFooter = styled(Footer)
+const ModalFooter = styled(Footer);
 
 export {
   Modal,

@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from "react";
 import { styled } from "../stitches.config";
+import { components } from "react-select";
 
 type StateVariant = "normal" | "error" | "disabled";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,12 +11,6 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange?: (e: any) => void;
   Size?: "md" | "lg" | "xl";
 }
-
-const InputContainer = styled("div", {
-  margin: "0.25rem",
-  position: "relative",
-  width: "100%",
-});
 
 const InputBase = styled("input", {
   fontFamily: "Poppins",
@@ -52,7 +47,7 @@ const InputBase = styled("input", {
     outline: "2px solid $primary",
   },
   defaultVariants: {
-    inputState: "normal", 
+    inputState: "normal",
   },
 });
 
@@ -65,6 +60,17 @@ const NumberInputBase = styled("input", {
   ...InputBase,
   paddingRight: "40px",
   appearance: "none",
+});
+
+const InputContainer = styled("div", {
+  margin: "0.25rem",
+  position: "relative",
+  width: "100%",
+  [`${components.SelectContainer} > &`]: {
+    // [`& ${InputBase},${NumberInputBase}`]: {
+    position: "absolute",
+    // },
+  },
 });
 
 const Button = styled("button", {
@@ -98,8 +104,7 @@ const ArrowIcon = styled("span", {
 });
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-
-  const { type, state, Size, ...restProps } = props; 
+  const { type, state, Size, ...restProps } = props;
 
   const [showPassword, setShowPassword] = useState(false);
   const [numberValue, setNumberValue] = useState<number | string>(0);
@@ -113,7 +118,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   };
 
   return (
-    <InputContainer ref={ref}>
+    <InputContainer>
       {type === "password" ? (
         <NumberInputContainer>
           <InputBase
@@ -146,7 +151,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
                 handleNumberChange(inputValue);
               }
             }}
-            {...restProps} 
+            {...restProps}
             inputState={state}
             inputSize={Size}
           />
