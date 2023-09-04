@@ -1,11 +1,16 @@
 import { styled } from "../stitches.config";
+import React, { HTMLProps } from "react";
 
 const SubTextarea = styled("textarea", {
   fontFamily: "Poppins",
   position: "absolute",
   padding: "1.5rem 5px",
   fontSize: "$md",
+  border: "1px solid $border",
   borderRadius: "8px",
+  "&:hover": {
+    border: "2px solid $primary",
+  },
 });
 
 const PlaceholderText = styled("span", {
@@ -21,7 +26,9 @@ const PlaceholderText = styled("span", {
 
 const TextareaWrap = styled("div", {
   fontFamily: "Poppins",
+  display: "inline-block",
   position: "relative",
+  border: "1px solid red",
   [`& ${SubTextarea}:focus + ${PlaceholderText}`]: {
     transition: "transform 0.3s",
     transform: "scale(0.75) translate(-18px,-2px)",
@@ -35,14 +42,14 @@ const TextareaWrap = styled("div", {
   },
 });
 
-interface TextareaProps {
+interface TextareaProps extends HTMLProps<HTMLTextAreaElement> {
   placeholdertext: string;
 }
 
 function Textarea({ placeholdertext }: TextareaProps) {
   return (
     <TextareaWrap>
-      <SubTextarea />
+      <SubTextarea style={{ resize: "none" }} />
       <PlaceholderText>{placeholdertext}</PlaceholderText>
     </TextareaWrap>
   );

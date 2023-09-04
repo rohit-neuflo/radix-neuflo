@@ -8,7 +8,7 @@ const activate = keyframes({
   "100%": { transform: "scale(1)" },
 });
 
-export const TabsList = styled(RadixTabs.List, {
+const TabsList = styled(RadixTabs.List, {
   flexShrink: 0,
   width: "fit-content",
   display: "flex",
@@ -21,7 +21,7 @@ export const TabsList = styled(RadixTabs.List, {
   },
 });
 
-export const TabItem = styled(RadixTabs.Trigger, {
+const TabItem = styled(RadixTabs.Trigger, {
   flexShrink: 0,
   all: "unset",
   position: "relative",
@@ -74,14 +74,14 @@ export const TabItem = styled(RadixTabs.Trigger, {
 //   );
 // });
 
-export const TabContent = styled(RadixTabs.Content, {
+const TabContent = styled(RadixTabs.Content, {
   flexGrow: 1,
   padding: "20px",
   backgroundColor: "white",
   outline: "none",
 });
 
-export const Tabs = styled(RadixTabs.Root, {
+const Tabs = styled(RadixTabs.Root, {
   display: "flex",
   flexDirection: "column",
   padding: "none",
@@ -173,3 +173,10 @@ export const Tabs = styled(RadixTabs.Root, {
     variant: "default",
   },
 });
+
+export {
+  TabsList,
+  TabItem,
+  Tabs,
+  TabContent
+}
