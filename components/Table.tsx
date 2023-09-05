@@ -1,80 +1,155 @@
-import { styled } from "../stitches.config"; 
+import React, { useState } from "react";
+import { styled } from "../stitches.config";
+import { Checkbox } from "./Checkbox";
 
-// Custom Table component
-const Table = styled("table", {
+// Styled components for the table
+const TableWrapper = styled("div", {
+  overflow: "auto",
   width: "100%",
-  fontFamily: "Poppins", // Replace with your desired font
+});
+
+const TableStyled = styled("table", {
+
+  width: "100%",
+  fontFamily: "Poppins",
   fontSize:"14px",
   borderCollapse: "separate",
   borderSpacing: 0,
 });
 
-// Custom TableHeader component
 const TableHeader = styled("thead", {
-  borderBottom: "1px solid $border", // Replace with your border color
+  borderBottom: "1px solid $border",
 });
 
-// Custom TableBody component
 const TableBody = styled("tbody", {
   "&:last-child": {
-    borderBottom: "none", // Remove border from the last child
+    borderBottom: "none",
   },
 });
 
-// Custom TableRow component
 const TableRow = styled("tr", {
-  borderBottom: "1px solid $border", // Replace with your border color
+  borderBottom: "1px solid $border",
   transition: "background-color 0.2s",
   "&:hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.05)", // Replace with your hover background color
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
   },
   "&[data-state=selected]": {
-    backgroundColor: "rgba(0, 0, 0, 0.1)", // Replace with your selected background color
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
 });
 
-// Custom TableHead component
 const TableHead = styled("th", {
-  fontWeight:"$regular",
-  height: "40px", // Adjust the height as needed
-  paddingLeft: "8px", // Adjust the padding as needed
+  height: "40px",
+  paddingLeft: "8px",
   textAlign: "left",
   verticalAlign: "middle",
-  color: "black", // Replace with your text color
+  color: "black",
   "&:has([role=checkbox])": {
-    paddingRight: 0, // Remove right padding if there's a checkbox
+    paddingRight: 0,
   },
   "&[role=checkbox]": {
-    transform: "translateY(2px)", // Adjust vertical alignment for checkboxes
+    transform: "translateY(2px)",
   },
 });
 
-// Custom TableCell component
 const TableCell = styled("td", {
-  padding: "8px", // Adjust the padding as needed
+  padding: "8px",
   textAlign: "left",
   verticalAlign: "middle",
   "&:has([role=checkbox])": {
-    paddingRight: 0, // Remove right padding if there's a checkbox
+    paddingRight: 0,
   },
   "&[role=checkbox]": {
-    transform: "translateY(2px)", // Adjust vertical alignment for checkboxes
+    transform: "translateY(2px)",
   },
 });
 
-// Custom TableCaption component
 const TableCaption = styled("caption", {
-  marginTop: "16px", // Adjust the margin as needed
-  fontSize: "0.875rem", // Replace with your desired font size
-  color: "black", // Replace with your text color
+  marginTop: "16px",
+  fontSize: "0.875rem",
+  color: "black",
 });
 
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableCaption,
+// Selectable Table component
+interface SelectableTableProps {
+  data: any[]; // Your table data
+  onSelect: (selectedData: any[]) => void; // Callback when rows are selected
+  selectable?: boolean; // Prop to enable/disable selection
+}
+
+const Table: React.FC<SelectableTableProps> = ({ data, onSelect, selectable }) => {
+  // State to keep track of selected rows
+  const [selectedRows, setSelectedRows] = useState<number[]>([]);
+  const [selectAll, setSelectAll] = useState<boolean>(false);
+
+  // Function to handle row selection
+  const handleRowSelect = (rowId: number) => {
+    if (selectedRows.includes(rowId)) {
+      // Deselect the row
+      setSelectedRows(selectedRows.filter((id) => id !== rowId));
+    } else {
+      // Select the row
+      setSelectedRows([...selectedRows, rowId]);
+    }
+
+    // Get the selected data
+    const selectedData = data.filter((row) => selectedRows.includes(row.id));
+    onSelect(selectedData);
+  };
+
+  // Function to handle select all
+  const handleSelectAll = () => {
+    if (!selectAll) {
+      // Select all rows
+      setSelectedRows(data.map((row) => row.id));
+    } else {
+      // Deselect all rows
+      setSelectedRows([]);
+    }
+
+    setSelectAll(!selectAll);
+  };
+
+  return (
+    <TableWrapper>
+      <TableStyled>
+        <TableHeader>
+          <TableRow>
+            <TableHead>
+              {selectable && (
+                <Checkbox
+                  label=""
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                />
+              )}
+            </TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Age</TableHead>
+            <TableHead>Email</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow
+              key={row.id}
+              data-state={selectedRows.includes(row.id) ? "selected" : ""}
+              onClick={() => handleRowSelect(row.id)}
+            >
+              <TableCell role="checkbox">
+                {selectable && (
+                  <Checkbox label="" checked={selectedRows.includes(row.id)} />
+                )}
+              </TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.age}</TableCell>
+              <TableCell>{row.email}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </TableStyled>
+    </TableWrapper>
+  );
 };
+
+export { Table };

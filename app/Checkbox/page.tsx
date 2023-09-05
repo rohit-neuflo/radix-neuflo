@@ -7,7 +7,6 @@ function CheckboxPage() {
   return (
     <div style={{ margin:"1rem", width: "100px" }}>
       <Checkbox
-        variant="rounded"
         id="name"
         label="Label left"
         labelSide="left"
