@@ -5,17 +5,19 @@ import { Textlabel } from "./Textlabel";
 
 type variantTypes = "default" | "rounded" | "square";
 type labelSideTypes = "left" | "right";
-interface CheckboxProps {
+type CheckboxProps = {
   id?: string;
   variant?: variantTypes;
   labelSide?: labelSideTypes;
   label: string;
-}
+} & React.ComponentProps<typeof RadixCheckbox.Root>
 const Checkbox = ({
   id,
   variant,
   labelSide = "right",
   label,
+  className,
+  ...props
 }: CheckboxProps) => (
   <div
     style={{
@@ -26,7 +28,7 @@ const Checkbox = ({
     }}
   >
     {labelSide === "left" && <Textlabel htmlFor={id}>{label}</Textlabel>}
-    <CheckboxRoot id={id} variant={variant}>
+    <CheckboxRoot id={id} variant={variant} className={className} {...props}>
       <CheckboxIndicator variant={variant}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

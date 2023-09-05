@@ -1,32 +1,18 @@
 "use client";
 import React from "react";
-import Select from "react-select";
-import { Input } from "../../components/Input";
+import {Select} from "@/components/Select"
 
-interface Custom {
-  innerRef: () => void;
-}
-
-function CustomInput({ innerRef, ...innerProps }: Custom) {
-  return (
-    <input
-      ref={innerRef}
-      {...innerProps}
-      placeholder="i love you gopi kutta"
-      style={{ position: "absolute" }}
-    />
-  );
-}
+const options = [
+  { label: "Chocolate", value: 1, },
+  { label: "Strawberry", value:2, },
+  { label: "Vanilla", value: 3, },
+];
 
 function SelectPage() {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  const [value,setValue] = React.useState<typeof options[0] | undefined>(options[0])
   return (
     <div>
-      <Select options={options} components={{ Input: CustomInput }} />
+      <Select options={options} value={value} onChange={ o => setValue(o)}/>
     </div>
   );
 }
