@@ -9,7 +9,8 @@ export default function InputPage() {
       <form>
         <Input
           type="text"
-          state="normal"
+          title="Input label text"
+          hintText="Informative message holder"
           placeholder="Text Input"
           required
           minLength={4}
@@ -17,39 +18,18 @@ export default function InputPage() {
           size={10}
           Size="lg"
         />
-        <Input type="password" state="normal" placeholder="Password Input" />
+        <Input type="password" placeholder="Password Input" />
+        <Input type="number" placeholder="Number Input" Size="md" />
+        <Input type="number" placeholder="Number Input" Size="lg" />
+        <Input type="number" placeholder="Number Input" Size="xl" />
+        <Input type="password" placeholder="Password Input" Size="xl" />
+        <Input type="email" placeholder="Email Input" Size="xl" />
         <Input
-          type="number"
-          state="normal"
-          placeholder="Number Input"
-          Size="md"
+          type="text"
+          error="there is an error"
+          placeholder="Error Input"
         />
-        <Input
-          type="number"
-          state="normal"
-          placeholder="Number Input"
-          Size="lg"
-        />
-        <Input
-          type="number"
-          state="normal"
-          placeholder="Number Input"
-          Size="xl"
-        />
-        <Input
-          type="password"
-          state="normal"
-          placeholder="Password Input"
-          Size="xl"
-        />
-        <Input
-          type="email"
-          state="normal"
-          placeholder="Email Input"
-          Size="xl"
-        />
-        <Input type="text" state="error" placeholder="Error Input" />
-        <Input type="text" state="disabled" placeholder="Disabled Input" />
+        <Input type="text" disabled placeholder="Disabled Input" />
         <Button variant="ghost">Submit</Button>
       </form>
     </>

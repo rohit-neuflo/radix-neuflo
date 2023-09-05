@@ -1,6 +1,6 @@
 import * as RadixRadioGroup from "@radix-ui/react-radio-group";
 import { styled } from "../stitches.config";
-import { TextLabel } from "./Checkbox";
+import { Textlabel } from "./Textlabel";
 
 const RadioGroup = styled(RadixRadioGroup.Root, {
   display: "flex",
@@ -49,12 +49,13 @@ const RadioGroupIndicator = styled(RadixRadioGroup.Indicator, {
   },
 });
 
-interface RadioProps {
+type RadioProps = {
   id?: string;
   value: string;
   labelSide?: "left" | "right";
   label: string;
-}
+} & React.ComponentProps<typeof RadixRadioGroup.Root>;
+
 const Radio = ({ id, value, labelSide = "right", label }: RadioProps) => (
   <div
     style={{
@@ -64,11 +65,11 @@ const Radio = ({ id, value, labelSide = "right", label }: RadioProps) => (
       width: "100%",
     }}
   >
-    {labelSide === "left" && <TextLabel htmlFor={id}>{label}</TextLabel>}
+    {labelSide === "left" && <Textlabel htmlFor={id}>{label}</Textlabel>}
     <RadioGroupItem value={value} id={id}>
       <RadioGroupIndicator />
     </RadioGroupItem>
-    {labelSide === "right" && <TextLabel htmlFor={id}>{label}</TextLabel>}
+    {labelSide === "right" && <Textlabel htmlFor={id}>{label}</Textlabel>}
   </div>
 );
 

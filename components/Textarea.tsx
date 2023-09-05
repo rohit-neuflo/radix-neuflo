@@ -42,7 +42,8 @@ const TextareaWrap = styled("div", {
   },
 });
 
-interface TextareaProps extends HTMLProps<HTMLTextAreaElement> {
+interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholdertext: string;
 }
 

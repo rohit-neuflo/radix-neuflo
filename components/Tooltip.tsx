@@ -57,6 +57,19 @@ const TooltipContent = styled(RadixTooltip.Content, {
     '&[data-side="bottom"]': { animationName: slideUpAndFade },
     '&[data-side="left"]': { animationName: slideRightAndFade },
   },
+  "&:before": {
+    content: "",
+    // top:"50%",
+    position: "absolute",
+    left: "0",
+    width: "0",
+    height: "0",
+    borderLeft: "5px solid transparent",
+    borderRight: "5px solid transparent",
+    backgroundColor: "red",
+    zIndex: "100001",
+    pointerEvents: "none",
+  },
 });
 
 const TooltipArrow = styled(RadixTooltip.Arrow, {
@@ -65,7 +78,7 @@ const TooltipArrow = styled(RadixTooltip.Arrow, {
   //   "0px 0px 1px 0px rgba(0, 0, 0, 0.40), 0px 6px 6px -6px rgba(0, 0, 0, 0.16)",
   fill: "$primary-light",
   // stroke:'black',
-  //   border: "1px solid red",
+  border: "1px solid red",
 });
 
 interface TooltipProps {
@@ -96,7 +109,7 @@ export function Tooltip({
         <TooltipPortal>
           <TooltipContent side={side} align="center">
             {content}
-            <TooltipArrow width={11} height={5} />
+            {/* <TooltipArrow width={11} height={5} /> */}
           </TooltipContent>
         </TooltipPortal>
       </TooltipRoot>

@@ -84,28 +84,30 @@ const BannerTrigger = styled(AlertDialog.Trigger);
 const Banner = styled(AlertDialog.Root);
 const BannerCancel = styled(AlertDialog.Cancel);
 
-interface BannerProps {
+type BannerProps = {
   title: string;
   description: string;
   actionType: "button" | "icon";
   action: ReactNode[];
-}
+} & React.ComponentProps<typeof AlertDialog.Content>;
 
 function BannerContent({
   title,
   description,
   actionType,
   action,
+  className,
+  ...props
 }: BannerProps) {
   return (
     <AlertDialog.Portal>
-      <RadixBannerContent>
+      <RadixBannerContent className={className} {...props}>
         <ContentDiv>
           <BannerTitle>{title}</BannerTitle>
           <BannerDescription>{description}</BannerDescription>
         </ContentDiv>
         <ActionDiv>
-          {actionType === "button" && action.length > 0
+        {actionType === "button" && action.length > 0
             ? action.map((action, index) => (
                 <BannerButtonAction key={index}>{action}</BannerButtonAction>
               ))
@@ -117,5 +119,7 @@ function BannerContent({
     </AlertDialog.Portal>
   );
 }
+
+BannerContent.displayName = AlertDialog.Content.displayName;
 
 export { Banner, BannerTrigger, BannerContent ,BannerCancel};
