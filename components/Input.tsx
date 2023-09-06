@@ -101,7 +101,7 @@ const Title = styled("div", {
   variants:{
     disabled: {
       true: {
-        opacity:"0.1",
+        opacity:"0.5",
       },
       false: {},
     },
@@ -119,8 +119,7 @@ const HintText = styled("div", {
   variants: {
     disabled: {
       true: {
-        pointerEvents: "none",
-        cursor: "not-allowed",
+        opacity:"0.5",
       },
       false: {},
     },

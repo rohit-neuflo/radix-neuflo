@@ -10,7 +10,7 @@ type CheckboxProps = {
   variant?: variantTypes;
   labelSide?: labelSideTypes;
   label: string;
-} & React.ComponentProps<typeof RadixCheckbox.Root>
+} & React.ComponentProps<typeof RadixCheckbox.Root>;
 const Checkbox = ({
   id,
   variant,
@@ -110,6 +110,5 @@ const CheckboxIndicator = styled(RadixCheckbox.Indicator, {
     variant: "default",
   },
 });
-
 
 export { Checkbox };

@@ -2,10 +2,10 @@
 import React from "react";
 import { Select, SelectOption } from "@/components/Select";
 
-const options = [
-  { label: "Chocolate", value: 1 },
-  { label: "Strawberry", value: 2 },
-  { label: "Vanilla", value: 3 },
+const options: SelectOption[] = [
+  { label: "Chocolate", value: "1" },
+  { label: "Strawberry", value: "2" },
+  { label: "Vanilla", value: "3", type: "checkbox" },
 ];
 
 function SelectPage() {

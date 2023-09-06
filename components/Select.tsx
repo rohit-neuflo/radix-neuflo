@@ -3,10 +3,12 @@ import { styled } from "../stitches.config";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { Title, HintText } from "./Input";
 import { SelectHTMLAttributes } from "react"; // Import the necessary type
+import { Checkbox } from "./Checkbox";
 
 export type SelectOption = {
   label: string;
-  value: string | number;
+  value: string;
+  type?: "checkbox";
 };
 
 //   type MultipleSelectProps = {
@@ -47,6 +49,7 @@ const Container = styled("div", {
       true: {
         pointerEvents: "none",
         cursor: "not-allowed",
+        opacity: "0.5",
       },
       false: {},
     },
@@ -130,10 +133,10 @@ const MenuItem = styled("li", {
 });
 
 function Select({
+  options,
   value,
   error,
   onChange,
-  options,
   title,
   hintText,
   disabled,
@@ -189,19 +192,37 @@ function Select({
         <Value ref={dropdownRef2}>{value?.label}</Value>
         <ChevronDownIcon style={{ translate: "0 25%" }} />
         <Options className={isOpen ? "open" : ""}>
-          {/* <Options onClick={(e) => e.stopPropagation()} ref={dropdownRef} className={isOpen ? "open" : ""}> */}
-          {/* <Options $open={isOpen}> */}
-          {options.map((option) => (
-            <MenuItem
-              key={option.value}
-              onClick={(e) => {
-                e.stopPropagation();
-                selectOption(option);
-              }}
-            >
-              {option.label}
-            </MenuItem>
-          ))}
+          {options.map((option) => {
+            if (option.type === "checkbox") {
+              return (
+                <MenuItem
+                  key={option.value}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    selectOption(option);
+                  }}
+                >
+                  <Checkbox
+                    id={option.value}
+                    label={option.label}
+                    labelSide="left"
+                  />
+                </MenuItem>
+              );
+            } else {
+              return (
+                <MenuItem
+                  key={option.value}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    selectOption(option);
+                  }}
+                >
+                  {option.label}
+                </MenuItem>
+              );
+            }
+          })}
         </Options>
       </Container>
       {(hintText || error) && (
