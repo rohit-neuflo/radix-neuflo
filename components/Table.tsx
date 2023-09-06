@@ -8,15 +8,6 @@ const TableWrapper = styled("div", {
   width: "100%",
 });
 
-const TableStyled = styled("table", {
-
-  width: "100%",
-  fontFamily: "Poppins",
-  fontSize:"14px",
-  borderCollapse: "separate",
-  borderSpacing: 0,
-});
-
 const TableHeader = styled("thead", {
   borderBottom: "1px solid $border",
 });
@@ -27,21 +18,11 @@ const TableBody = styled("tbody", {
   },
 });
 
-const TableRow = styled("tr", {
-  borderBottom: "1px solid $border",
-  transition: "background-color 0.2s",
-  "&:hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-  },
-  "&[data-state=selected]": {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
-  },
-});
-
 const TableHead = styled("th", {
   height: "40px",
   paddingLeft: "8px",
   textAlign: "left",
+  fontWeight: "$heading",
   verticalAlign: "middle",
   color: "black",
   "&:has([role=checkbox])": {
@@ -64,6 +45,33 @@ const TableCell = styled("td", {
   },
 });
 
+const TableRow = styled("tr", {
+  borderBottom: "1px solid $border",
+  transition: "background-color 0.2s",
+  "&:hover": {
+    backgroundColor: "$secondary-hover",
+  },
+  "&[data-state=selected]": {
+    backgroundColor: "$secondary-hover",
+  },
+});
+
+const TableStyled = styled("table", {
+  background: "$surfaceColor",
+  width: "100%",
+  fontFamily: "Poppins",
+  fontSize: "14px",
+  fontWeight: "$regular",
+  borderCollapse: "separate",
+  borderSpacing: 0,
+  borderRadius: "8px",
+  [`& ${TableRow}:first-of-type`]: {
+    borderTopLeftRadius: "8px",
+    borderTopRightRadius: "8px",
+  },
+  [`& ${TableRow}:first-of-type`]: {},
+});
+
 const TableCaption = styled("caption", {
   marginTop: "16px",
   fontSize: "0.875rem",
@@ -77,7 +85,11 @@ interface SelectableTableProps {
   selectable?: boolean; // Prop to enable/disable selection
 }
 
-const Table: React.FC<SelectableTableProps> = ({ data, onSelect, selectable }) => {
+const Table: React.FC<SelectableTableProps> = ({
+  data,
+  onSelect,
+  selectable,
+}) => {
   // State to keep track of selected rows
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState<boolean>(false);
@@ -91,24 +103,26 @@ const Table: React.FC<SelectableTableProps> = ({ data, onSelect, selectable }) =
       // Select the row
       setSelectedRows([...selectedRows, rowId]);
     }
-
-    // Get the selected data
-    const selectedData = data.filter((row) => selectedRows.includes(row.id));
-    onSelect(selectedData);
   };
 
   // Function to handle select all
   const handleSelectAll = () => {
     if (!selectAll) {
       // Select all rows
-      setSelectedRows(data.map((row) => row.id));
+      const allRowIds = data.map((row) => row.id);
+      setSelectedRows(allRowIds);
     } else {
       // Deselect all rows
       setSelectedRows([]);
     }
-
     setSelectAll(!selectAll);
   };
+
+  // Effect to notify the parent component of the selected data
+  React.useEffect(() => {
+    const selectedData = data.filter((row) => selectedRows.includes(row.id));
+    onSelect(selectedData);
+  }, [selectedRows, data, onSelect]);
 
   return (
     <TableWrapper>
@@ -120,7 +134,7 @@ const Table: React.FC<SelectableTableProps> = ({ data, onSelect, selectable }) =
                 <Checkbox
                   label=""
                   checked={selectAll}
-                  onChange={handleSelectAll}
+                  onCheckedChange={handleSelectAll}
                 />
               )}
             </TableHead>
@@ -134,11 +148,15 @@ const Table: React.FC<SelectableTableProps> = ({ data, onSelect, selectable }) =
             <TableRow
               key={row.id}
               data-state={selectedRows.includes(row.id) ? "selected" : ""}
-              onClick={() => handleRowSelect(row.id)}
             >
-              <TableCell role="checkbox">
+              <TableCell>
                 {selectable && (
-                  <Checkbox label="" checked={selectedRows.includes(row.id)} />
+                  <Checkbox
+                    label=""
+                    // id={`checkbox-${row.id}`}
+                    checked={selectedRows.includes(row.id)}
+                    onCheckedChange={() => handleRowSelect(row.id)}
+                  />
                 )}
               </TableCell>
               <TableCell>{row.name}</TableCell>

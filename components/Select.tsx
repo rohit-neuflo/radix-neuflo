@@ -2,6 +2,7 @@ import * as React from "react";
 import { styled } from "../stitches.config";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { Title, HintText } from "./Input";
+import { SelectHTMLAttributes } from "react"; // Import the necessary type
 
 export type SelectOption = {
   label: string;
@@ -27,6 +28,7 @@ type SelectProps = {
   title?: string;
   hintText?: string;
   error?: string;
+  disabled?: boolean;
 };
 //   } & (SingleSelectProps | MultipleSelectProps)
 const Container = styled("div", {
@@ -41,6 +43,13 @@ const Container = styled("div", {
   width: "99%",
   border: "none",
   variants: {
+    disabled: {
+      true: {
+        pointerEvents: "none",
+        cursor: "not-allowed",
+      },
+      false: {},
+    },
     inputState: {
       error: {
         outline: "2px solid red",
@@ -77,7 +86,7 @@ const Value = styled("span", {
 });
 
 const Options = styled("ul", {
-  pointer: "cursor",
+  cursor: "pointer",
   backgroundColor: "$surfaceColor",
   position: "absolute",
   margin: "0",
@@ -127,6 +136,7 @@ function Select({
   options,
   title,
   hintText,
+  disabled,
 }: SelectProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const state = error ? "error" : "normal";
@@ -165,8 +175,9 @@ function Select({
         maxWidth: "100%",
       }}
     >
-      {title && <Title>{title}</Title>}
+      {title && <Title disabled={disabled ? "true" : "false"}>{title}</Title>}
       <Container
+        disabled={disabled ? "true" : "false"}
         ref={dropdownRef}
         onBlur={() => setIsOpen(false)}
         onClick={(e) => {
@@ -194,7 +205,9 @@ function Select({
         </Options>
       </Container>
       {(hintText || error) && (
-        <HintText inputState={state}>{error ? error : hintText}</HintText>
+        <HintText disabled={disabled ? "true" : "false"} inputState={state}>
+          {error ? error : hintText}
+        </HintText>
       )}
     </div>
   );

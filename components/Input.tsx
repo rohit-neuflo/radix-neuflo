@@ -98,6 +98,14 @@ const Title = styled("div", {
   lineHeight: "1.5rem",
   color: "$primary-body-text",
   marginBottom: "0.5rem",
+  variants:{
+    disabled: {
+      true: {
+        opacity:"0.1",
+      },
+      false: {},
+    },
+  },
 });
 
 const HintText = styled("div", {
@@ -109,6 +117,13 @@ const HintText = styled("div", {
   marginTop: "0.5rem",
   padding: "0 12px",
   variants: {
+    disabled: {
+      true: {
+        pointerEvents: "none",
+        cursor: "not-allowed",
+      },
+      false: {},
+    },
     inputState: {
       error: {
         color: "red",

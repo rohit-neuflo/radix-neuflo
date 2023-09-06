@@ -23,6 +23,7 @@ function SelectPage() {
         onChange={(o) => setValue(o)}
       />
       <Select
+        disabled
         title="Title"
         hintText="Select custom"
         options={options}
