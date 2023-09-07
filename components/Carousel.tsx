@@ -1,92 +1,125 @@
-import { styled } from "../stitches.config";
-import React, { useState } from "react";
+import React from "react";
+import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { motion, AnimatePresence } from "framer-motion";
-
-const SlideImage = styled("img", {
-  width: "400px",
-  height: "300px",
-  objectFit: "cover",
-});
-
-const StyledSlider = styled("div", {
-  height: "100%",
-  width: "100%",
-  // borderBottom: "1px solid green",
-  position: "relative",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-});
-
-interface Slide {
-  image: string;
+import { styled } from "@stitches/react";
+interface CustomCarouselProps {
+  items: React.ReactNode[];
+  perPage?: 1 | 2 | 3 | 4 | 5 | 6;
+  padding?: "2xs" | "xs" | "sm" | "md" | "lg";
+  variant?: "circle" | "rounded";
 }
 
-interface CarouselProps {
-  slides: Slide[];
-}
+const StyledButton = styled("button", {
+  background: "$surfaceColor",
+  height: "2rem",
+  width: "2rem",
+  boxShadow: "$boxShadow$sm",
+  opacity: "0.8",
+  transition: "opacity 150ms",
+  "&:hover:not(:disabled)": {
+    opacity: "1",
+  },
+  variants: {
+    variant: {
+      circle: {
+        borderRadius: "9999px",
+      },
+      rounded: {
+        borderRadius: "8px",
+      },
+    },
+  },
+});
 
-const Carousel: React.FC<CarouselProps> = ({ slides }) => {
-  const [current, setCurrent] = useState(0);
-  const length = slides.length;
+const PaginationContainer = styled("ul", {
+  bottom: "-1.5rem",
+  [`& .splide__pagination__page`]: {
+    backgroundColor: "$border",
+    transition:
+      "background-color 150ms, opacity 150ms, transform 250ms ease-in-out",
+    opacity: "1",
+    "&:hover": {
+      backgroundColor: "$primary",
+      opacity: "0.7",
+    },
+  },
+  [`& .splide__pagination__page.is-active`]: {
+    backgroundColor: "$primary",
+    opacity: "1",
+  },
+});
 
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
+const SplideSlide2 = styled(SplideSlide, {
+  ["&.is-active"]: {
+    border: "1px solid red",
+  },
+});
+
+const CustomCarousel: React.FC<CustomCarouselProps> = ({
+  items,
+  perPage,
+  padding,
+  variant = "circle",
+}) => {
+  const paddingValues = {
+    "2xs": "8px",
+    xs: "12px",
+    sm: "16px",
+    md: "24px",
+    lg: "32px",
   };
 
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
+  const defaultOptions = {
+    type: "loop",
+    perPage: perPage ? perPage : 1,
+    focus: 0,
+    gap: padding ? paddingValues[padding] : "1.5rem",
+    padding: "1rem",
+    breakPoints: {
+      768: {
+        perPage: 2,
+        gap: "0.5rem",
+      },
+      576: {
+        perPage: 1,
+        gap: "0.5rem",
+      },
+    },
   };
+
+  const carouselOptions = { ...defaultOptions };
 
   return (
-    <StyledSlider>
-      <ChevronLeftIcon
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "20px",
-          fontSize: "2rem",
-        }}
-        onClick={prevSlide}
-      />
-      {slides.map((slide, index, slides) => {
-        const prevSlide = index > 0 ? slides[index - 1] : null;
-        const nextSlide = index < slides.length - 1 ? slides[index + 1] : null;
-        return (
-          <div key={index} style={{ position: "absolute" }}>
-            <AnimatePresence>
-              {index === current && (
-                <motion.div
-                  key={index}
-                  // style={{ position: "absolute" }}
-                  initial={{ x: 400, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: -400, opacity: 0 }}
-                  transition={{ duration: 1, type: "spring" }}
-                >
-                  <SlideImage
-                    // style={{position:"absolute",}}
-                    src={slide.image}
-                    alt=""
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        );
-      })}
-      <ChevronRightIcon
-        style={{
-          position: "absolute",
-          top: "50%",
-          right: "20px",
-          fontSize: "2rem",
-        }}
-        onClick={nextSlide}
-      />
-    </StyledSlider>
+    <div style={{ height: "100%", marginTop: "1rem" }}>
+      <Splide hasTrack={false} options={carouselOptions}>
+        <SplideTrack>
+          {items.map((item, index) => (
+            <SplideSlide2 key={index}>{item}</SplideSlide2>
+          ))}
+        </SplideTrack>
+        <div className="splide__arrows">
+          <StyledButton
+            variant={variant}
+            className="splide__arrow splide__arrow--prev"
+          >
+            <ChevronRightIcon />
+          </StyledButton>
+          <StyledButton
+            variant={variant}
+            className="splide__arrow splide__arrow--next"
+          >
+            <ChevronRightIcon />
+          </StyledButton>
+          <PaginationContainer
+            className="splide__pagination splide__pagination--ltr"
+            role="tablist"
+            aria-label="Select a slide to show"
+          ></PaginationContainer>
+        </div>
+      </Splide>
+    </div>
   );
 };
 
-export { Carousel };
+export default CustomCarousel;

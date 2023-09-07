@@ -119,7 +119,8 @@ const HintText = styled("div", {
   variants: {
     disabled: {
       true: {
-        opacity:"0.5",
+        pointerEvents: "none",
+        cursor: "not-allowed",
       },
       false: {},
     },
