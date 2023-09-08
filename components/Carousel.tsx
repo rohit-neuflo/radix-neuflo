@@ -52,7 +52,7 @@ const PaginationContainer = styled("ul", {
 
 const SplideSlide2 = styled(SplideSlide, {
   ["&.is-active"]: {
-    border: "1px solid red",
+    // border: "1px solid red",
   },
 });
 

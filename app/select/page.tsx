@@ -3,10 +3,34 @@ import React from "react";
 import { Select, SelectOption } from "@/components/Select";
 
 const options: SelectOption[] = [
-  { label: "Chocolate", value: "1" },
-  { label: "Strawberry", value: "2" },
-  { label: "Vanilla", value: "3", type: "checkbox" },
+  { label: "Chocolate", value: "chocolate" },
+  { label: "Strawberry", value: "strawberry" },
+  { label: "Vanilla", value: "vanilla"},
 ];
+
+/* 
+const option = [
+    tab1:[
+      {
+        type:"checkbox", label:"chocolate", value:"chocolate"
+      }
+      {
+        type:"checkbox", label:"Strawberry", value:"strawberry"
+      }
+      {
+        type:"checkbox", label:"Vanilla", value:"vanilla"
+      }
+    ],
+    tab2: [
+      {
+        type:"checkbox", label:"Tomato", value:"tomato"
+      }
+      {
+        type:"checkbox", label:"Broccoli", value:"broccoli"
+      }
+    ]
+]
+*/
 
 function SelectPage() {
   const [value, setValue] = React.useState<SelectOption | undefined>(

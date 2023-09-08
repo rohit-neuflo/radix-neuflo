@@ -8,7 +8,6 @@ import { Checkbox } from "./Checkbox";
 export type SelectOption = {
   label: string;
   value: string;
-  type?: "checkbox";
 };
 
 //   type MultipleSelectProps = {
@@ -89,9 +88,9 @@ const Value = styled("span", {
 });
 
 const Options = styled("ul", {
+  position: "absolute",
   cursor: "pointer",
   backgroundColor: "$surfaceColor",
-  position: "absolute",
   margin: "0",
   padding: "0",
   listStyle: "none",
@@ -193,24 +192,7 @@ function Select({
         <ChevronDownIcon style={{ translate: "0 25%" }} />
         <Options className={isOpen ? "open" : ""}>
           {options.map((option) => {
-            if (option.type === "checkbox") {
-              return (
-                <MenuItem
-                  key={option.value}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    selectOption(option);
-                  }}
-                >
-                  <Checkbox
-                    id={option.value}
-                    label={option.label}
-                    labelSide="left"
-                  />
-                </MenuItem>
-              );
-            } else {
-              return (
+            return(
                 <MenuItem
                   key={option.value}
                   onClick={(e) => {
@@ -221,7 +203,6 @@ function Select({
                   {option.label}
                 </MenuItem>
               );
-            }
           })}
         </Options>
       </Container>
