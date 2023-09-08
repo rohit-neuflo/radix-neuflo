@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import Gauge from '@/components/Gauge'; // Adjust the import path
+import {Gauge} from '@/components/Gauge'; // Adjust the import path
 
 const App = () => {
   return (

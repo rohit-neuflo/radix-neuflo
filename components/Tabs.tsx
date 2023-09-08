@@ -101,7 +101,7 @@ const Tabs = styled(RadixTabs.Root, {
               width: "100%",
               backgroundColor: "$purple",
               borderRadius: "8px 8px 0px 0px",
-              animation: `${activate} 200ms ease-in-out`,
+              animation: `${activate} 100ms ease-in-out`,
             },
             backgroundColor: "#FFFFFF03",
             color: "#47AAD4",
@@ -174,9 +174,4 @@ const Tabs = styled(RadixTabs.Root, {
   },
 });
 
-export {
-  TabsList,
-  TabItem,
-  Tabs,
-  TabContent
-}
+export { TabsList, TabItem, Tabs, TabContent };

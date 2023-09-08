@@ -4,10 +4,21 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { Title, HintText } from "./Input";
 import { SelectHTMLAttributes } from "react"; // Import the necessary type
 import { Checkbox } from "./Checkbox";
+import { Tabs, TabsList, TabItem, TabContent } from "./Tabs";
+// export type SelectOption = {
+//   label: string;
+//   value: string;
+// };
 
 export type SelectOption = {
+  type?: "checkbox";
   label: string;
   value: string;
+};
+
+export type TabOption = {
+  tabName: string;
+  options: SelectOption[];
 };
 
 //   type MultipleSelectProps = {
@@ -23,7 +34,8 @@ export type SelectOption = {
 //   }
 
 type SelectProps = {
-  options: SelectOption[];
+  options?: SelectOption[];
+  tabs?: TabOption[];
   value?: SelectOption;
   onChange: (value: SelectOption | undefined) => void;
   title?: string;
@@ -87,7 +99,7 @@ const Value = styled("span", {
   flexGrow: "1",
 });
 
-const Options = styled("ul", {
+const Options = styled("div", {
   position: "absolute",
   cursor: "pointer",
   backgroundColor: "$surfaceColor",
@@ -108,7 +120,7 @@ const Options = styled("ul", {
   },
 });
 
-const MenuItem = styled("li", {
+const MenuItem = styled("div", {
   "&:hover": { backgroundColor: "$secondary" },
   variants: {
     size: {
@@ -133,6 +145,7 @@ const MenuItem = styled("li", {
 
 function Select({
   options,
+  tabs,
   value,
   error,
   onChange,
@@ -166,7 +179,11 @@ function Select({
       document.addEventListener("click", onClick);
     };
   });
-
+  if (options && tabs) {
+    throw new Error(
+      "You can't pass both 'options' and 'tabs' props at the same time."
+    );
+  }
   return (
     <div
       style={{
@@ -191,8 +208,9 @@ function Select({
         <Value ref={dropdownRef2}>{value?.label}</Value>
         <ChevronDownIcon style={{ translate: "0 25%" }} />
         <Options className={isOpen ? "open" : ""}>
-          {options.map((option) => {
-            return(
+          {options
+            ? options &&
+              options.map((option) => (
                 <MenuItem
                   key={option.value}
                   onClick={(e) => {
@@ -202,9 +220,56 @@ function Select({
                 >
                   {option.label}
                 </MenuItem>
-              );
-          })}
+              ))
+            : tabs && (
+                <Tabs defaultValue={tabs[0].tabName}>
+                  <TabsList>
+                    {tabs.map((tab) => (
+                      <TabItem value={tab.tabName}>{tab.tabName}</TabItem>
+                    ))}
+                  </TabsList>
+                  {tabs.map((tab) => (
+                    <TabContent value={tab.tabName}>
+                      {tab.options.map((option) => (
+                        <MenuItem>
+                          <Checkbox
+                            id={option.value}
+                            label={option.label}
+                            labelSide="left"
+                          />
+                        </MenuItem>
+                      ))}
+                    </TabContent>
+                  ))}
+                </Tabs>
+              )}
         </Options>
+        {/* <Options className={isOpen ? "open" : ""}>
+           { if(options) {
+          options.map((option) => {
+              return(
+                <MenuItem
+                key={option.value}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  selectOption(option);
+                }}
+                >
+                  {option.label}
+                </MenuItem>
+              );
+              })
+           }
+            else if(tabs) {
+              tabs.map((tab) => {
+                return(
+                  
+                  <MenuItem></MenuItem>
+                )
+              })}
+           
+          }
+        </Options> */}
       </Container>
       {(hintText || error) && (
         <HintText disabled={disabled ? "true" : "false"} inputState={state}>

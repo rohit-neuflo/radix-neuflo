@@ -63,7 +63,7 @@ interface GaugeProps {
   showValue: boolean;
 }
 
-const Gauge: React.FC<GaugeProps> = ({ value, size, showValue }) => {
+export const Gauge: React.FC<GaugeProps> = ({ value, size, showValue }) => {
   const circumference = 332;
   const valueInCircumference = (value / 100) * circumference;
   const strokeDasharray = `${circumference} ${circumference}`;
