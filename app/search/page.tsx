@@ -1,35 +1,10 @@
-'use client'
-import React from 'react'
-// import Search from "@/components/Search"
-import { Command } from 'cmdk'
+"use client";
+import React, { useState } from "react";
+import { SearchBar } from "@/components/SearchBar";
 
 function SearchPage() {
-  const [open, setOpen] = React.useState(false)
-  React.useEffect(() => {
-    const down = (e:KeyboardEvent) => {
-      if (e.key === 'k' && e.metaKey) {
-        setOpen((open) => !open)
-      }
-    }
-    document.addEventListener('keydown', down)
-    return () => document.removeEventListener('keydown', down)
-  }, [])
-  return (
-     <Command.Dialog open={open} onOpenChange={setOpen} label="Global Command Menu">
-      <Command.Input />
-      <Command.List>
-        <Command.Empty>No results found.</Command.Empty>
-        <Command.Group heading="Letters">
-          <Command.Item>a</Command.Item>
-          <Command.Item>b</Command.Item>
-          <Command.Separator />
-          <Command.Item>c</Command.Item>
-        </Command.Group>
-        // ...
-        <Command.Item>x</Command.Item>
-      </Command.List>
-    </Command.Dialog>
-  )
+  const [value, setValue] = useState<number | string>("");
+  return <SearchBar value={value} onChange={(o) => setValue(o)} />;
 }
 
-export default SearchPage
+export default SearchPage;

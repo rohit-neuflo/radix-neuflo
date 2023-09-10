@@ -1,14 +1,11 @@
 import * as React from "react";
 import { styled } from "../stitches.config";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { Title, HintText } from "./Input";
-import { SelectHTMLAttributes } from "react"; // Import the necessary type
+import { Title, HintText } from "./Input"; // Import the necessary type
 import { Checkbox } from "./Checkbox";
+import { Label } from "./Label";
 import { Tabs, TabsList, TabItem, TabContent } from "./Tabs";
-// export type SelectOption = {
-//   label: string;
-//   value: string;
-// };
+import { SearchBar } from "./SearchBar";
 
 export type SelectOption = {
   type?: "checkbox";
@@ -17,44 +14,46 @@ export type SelectOption = {
 };
 
 export type TabOption = {
+  multiple?: true;
   tabName: string;
   options: SelectOption[];
 };
 
-//   type MultipleSelectProps = {
-//     multiple: true
-//     value: SelectOption[]
-//     onChange: (value: SelectOption[]) => void
-//   }
+type MultipleSelectProps = {
+  multiple: true;
+  value: SelectOption[];
+  onChange: (value: SelectOption[]) => void;
+};
 
-//   type SingleSelectProps = {
-//     multiple?: false
-//     value?: SelectOption
-//     onChange: (value: SelectOption | undefined) => void
-//   }
-
-type SelectProps = {
-  options?: SelectOption[];
-  tabs?: TabOption[];
+type SingleSelectProps = {
+  multiple?: false;
   value?: SelectOption;
   onChange: (value: SelectOption | undefined) => void;
+};
+
+type SelectProps = {
+  searchable?: boolean;
+  options?: SelectOption[];
+  tabs?: TabOption[];
+  size?: "md" | "lg" | "xl";
   title?: string;
   hintText?: string;
   error?: string;
   disabled?: boolean;
-};
-//   } & (SingleSelectProps | MultipleSelectProps)
+} & (SingleSelectProps | MultipleSelectProps);
+
 const Container = styled("div", {
   // position: "relative",
   minHeight: "1.5rem",
   display: "flex",
   alignItems: "center",
   fontFamily: "Poppins",
-  padding: "12px 16px",
   outline: "1px solid $border",
   borderRadius: "8px",
-  width: "99%",
+  height: "40px",
+  width: "100%",
   border: "none",
+  boxSizing: " border-box",
   variants: {
     disabled: {
       true: {
@@ -97,6 +96,11 @@ const Container = styled("div", {
 
 const Value = styled("span", {
   flexGrow: "1",
+  display: "flex",
+  gap: "4px",
+  [`& ${Label}`]: {
+    backgroundColor: "$primary",
+  },
 });
 
 const Options = styled("div", {
@@ -122,6 +126,13 @@ const Options = styled("div", {
 
 const MenuItem = styled("div", {
   "&:hover": { backgroundColor: "$secondary" },
+  [`&.selected`]: {
+    backgroundColor: "$secondary",
+    "&:hover": {
+      backgroundColor: "$primary-light",
+      color: "$primary-button-text-forced-white",
+    },
+  },
   variants: {
     size: {
       md: {
@@ -144,8 +155,11 @@ const MenuItem = styled("div", {
 });
 
 function Select({
+  multiple,
+  searchable,
   options,
   tabs,
+  size = "md",
   value,
   error,
   onChange,
@@ -154,18 +168,46 @@ function Select({
   disabled,
 }: SelectProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState("");
+
+  // const dropdownRef = React.useRef(null);
+  const dropdownRef = React.useRef<HTMLDivElement | null>(null);
+  const dropdownRef2 = React.useRef<HTMLDivElement | null>(null);
+  const searchRef = React.useRef<HTMLInputElement | null>(null);
+
   const state = error ? "error" : "normal";
 
   function selectOption(option: SelectOption) {
-    onChange(option);
+    if (multiple) {
+      if (value.includes(option)) {
+        onChange(value.filter((o) => o !== option));
+      } else {
+        onChange([...value, option]);
+      }
+    } else {
+      if (option !== value) onChange(option);
+    }
   }
 
-  const dropdownRef = React.useRef(null);
-  const dropdownRef2 = React.useRef(null);
+  function isOptionSelected(option: SelectOption) {
+    return multiple ? value.includes(option) : option === value;
+  }
+
+  const getOptions = () => {
+    if (!searchValue) {
+      return options;
+    }
+    return options?.filter(
+      (option) =>
+        option.label.toLowerCase().indexOf(searchValue.toLowerCase()) === 0
+    );
+  };
 
   React.useEffect(() => {
     const onClick = (e: any) => {
-      if (
+      if (e.target === searchRef.current) {
+        setIsOpen(true);
+      } else if (
         e.target !== dropdownRef.current &&
         e.target !== dropdownRef2.current
       ) {
@@ -179,6 +221,31 @@ function Select({
       document.addEventListener("click", onClick);
     };
   });
+
+  React.useEffect(() => {
+    const handler = (e: any) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("click", handler);
+    return () => {
+      window.removeEventListener("click", handler);
+    };
+  });
+
+  const handleInputClick = (e: any) => {
+    setIsOpen(!isOpen);
+  };
+
+  React.useEffect(() => {
+    setSearchValue("");
+    // if (isOpen && searchRef.current) {
+    //     searchRef.current.focus();
+    // }
+  }, [isOpen]);
+
   if (options && tabs) {
     throw new Error(
       "You can't pass both 'options' and 'tabs' props at the same time."
@@ -200,76 +267,82 @@ function Select({
         ref={dropdownRef}
         onBlur={() => setIsOpen(false)}
         onClick={(e) => {
-          e.stopPropagation();
-          setIsOpen((prev) => !prev);
+          handleInputClick(e)
         }}
         inputState={state}
+        inputSize={size}
       >
-        <Value ref={dropdownRef2}>{value?.label}</Value>
-        <ChevronDownIcon style={{ translate: "0 25%" }} />
+        <Value ref={dropdownRef2}>
+          {multiple
+            ? value.map((v) => (
+                <Label key={v.value}>
+                  {v.label}
+                  <span
+                    style={{ paddingLeft: "4px" }}
+                    onClick={(e) => {
+                      // e.stopPropagation();
+                      selectOption(v);
+                    }}
+                  >
+                    &times;
+                  </span>
+                </Label>
+              ))
+            : value?.label}
+        </Value>
+        <ChevronDownIcon />
         <Options className={isOpen ? "open" : ""}>
-          {options
-            ? options &&
-              options.map((option) => (
+          {options ? (
+            <>
+              {searchable && (
+                <SearchBar
+                  value={searchValue}
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
+                    // e.stopPropagation();
+                  }}
+                  style={{ marginLeft: "0.5rem", width: "99%" }}
+                  ref={searchRef}
+                />
+              )}
+              {getOptions()?.map((option: SelectOption) => (
                 <MenuItem
+                  size={size}
                   key={option.value}
                   onClick={(e) => {
-                    e.stopPropagation();
                     selectOption(option);
                   }}
+                  className={isOptionSelected(option) ? "selected" : ""}
                 >
                   {option.label}
                 </MenuItem>
-              ))
-            : tabs && (
-                <Tabs defaultValue={tabs[0].tabName}>
-                  <TabsList>
-                    {tabs.map((tab) => (
-                      <TabItem value={tab.tabName}>{tab.tabName}</TabItem>
-                    ))}
-                  </TabsList>
+              ))}
+            </>
+          ) : (
+            tabs && (
+              <Tabs defaultValue={tabs[0].tabName}>
+                <TabsList>
                   {tabs.map((tab) => (
-                    <TabContent value={tab.tabName}>
-                      {tab.options.map((option) => (
-                        <MenuItem>
-                          <Checkbox
-                            id={option.value}
-                            label={option.label}
-                            labelSide="left"
-                          />
-                        </MenuItem>
-                      ))}
-                    </TabContent>
+                    <TabItem value={tab.tabName}>{tab.tabName}</TabItem>
                   ))}
-                </Tabs>
-              )}
+                </TabsList>
+                {tabs.map((tab) => (
+                  <TabContent value={tab.tabName}>
+                    {tab.options.map((option) => (
+                      <MenuItem>
+                        <Checkbox
+                          id={option.value}
+                          label={option.label}
+                          labelSide="left"
+                        />
+                      </MenuItem>
+                    ))}
+                  </TabContent>
+                ))}
+              </Tabs>
+            )
+          )}
         </Options>
-        {/* <Options className={isOpen ? "open" : ""}>
-           { if(options) {
-          options.map((option) => {
-              return(
-                <MenuItem
-                key={option.value}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectOption(option);
-                }}
-                >
-                  {option.label}
-                </MenuItem>
-              );
-              })
-           }
-            else if(tabs) {
-              tabs.map((tab) => {
-                return(
-                  
-                  <MenuItem></MenuItem>
-                )
-              })}
-           
-          }
-        </Options> */}
       </Container>
       {(hintText || error) && (
         <HintText disabled={disabled ? "true" : "false"} inputState={state}>

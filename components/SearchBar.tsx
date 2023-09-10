@@ -1,37 +1,22 @@
+import React from "react";
 import { styled } from "../stitches.config";
+import { Input, InputProps } from "./Input";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
-const TextBar = styled("input", {
-  height: "1.5rem",
-  fontSize: "$sm",
-  padding: "0",
-  //   backgroundColor: "red",
-  borderRadius: "4px",
-  // border: "1px solid #ccc",
-  border: "none",
-  width: "100%",
-  outline: "none",
-  "&::placeholder": {
-    color: "#aaa",
-  },
-});
+const SearchBar = React.forwardRef<
+  React.ElementRef<typeof Input>,
+  React.ComponentPropsWithoutRef<typeof Input>
+>(({placeholder, ...props }, ref) => {
+  const placeholder2 = placeholder ? placeholder : "Search";
+  return(
+    <Input
+      ref={ref}
+      {...props}
+      leftIcon={<MagnifyingGlassIcon />}
+      type="text"
+      placeholder={placeholder2}
+    />
+  )
+})
 
-const SearchBarRoot = styled("div", {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "1.5rem",
-  padding: "1rem",
-  borderRadius: "12px",
-  // border: "1px solid none",
-  "&:active": {
-    outline: "2px solid $purple",
-  },
-});
-export default function SearchBar() {
-  return (
-    <SearchBarRoot>
-      {" "}
-      <TextBar placeholder="Search" />
-    </SearchBarRoot>
-  );
-}
+export { SearchBar };

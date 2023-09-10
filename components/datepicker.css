@@ -1,0 +1,64 @@
+.ant-picker{
+  font-family: Poppins;
+}
+
+.createDateRangePicker .ant-picker-panel-layout > div {
+    font-family: Poppins;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row-reverse;
+    /* background-color: red; */
+  }
+.createDateRangePicker .ant-picker-month-btn {
+    font-family: Poppins;
+}
+.createDateRangePicker .ant-picker-year-btn {
+    font-family: Poppins;
+}
+  .ant-picker-dropdown .ant-picker-footer {
+    min-width: fit-content;
+    padding: 0.5rem;
+  }
+
+  .createDateRangePicker
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner {
+  background-color: rgb(56.8, 136, 169.6) !important;
+  border-radius: 8px;
+}
+
+.createDateRangePicker
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  background-color:rgb(56.8, 136, 169.6) !important;
+  border-radius: 8px;
+}
+
+.createDateRangePicker
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+    color:#47aad4;
+  border-color: #47aad40a!important;
+}
+
+.createDateRangePicker .ant-picker-decade-btn{
+    font-family: Poppins;
+}
+
+/* .createDateRangePicker
+  .ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before,
+.createDateRangePicker
+  .ant-picker-cell-in-view.ant-picker-cell-in-range::before,
+.createDateRangePicker
+  .ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before,
+.createDateRangePicker
+  .ant-picker-time-panel-column
+  > li.ant-picker-time-panel-cell-selected
+  .ant-picker-time-panel-cell-inner {
+    border-radius: 8px;
+  
+   
+  background-color:#47aad40a !important;
+
+} */
+

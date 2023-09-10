@@ -27,33 +27,38 @@ const tabs: TabOption[] = [
 ];
 
 function SelectPage() {
-  const [value, setValue] = React.useState<SelectOption | undefined>(
-    options[0]
-  );
-  const [value2, setValue2] = React.useState<SelectOption | undefined>();
+  const [value, setValue] = React.useState<SelectOption>(options[0]);
+  const [value2, setValue2] = React.useState<SelectOption[]>([options[0]]);
   return (
     <div>
-      <Select
+      {/* <Select
         title="Title"
         hintText="Select custom"
         options={options}
         value={value}
-        onChange={(o) => setValue(o)}
-      />
+        onChange={(o) => {
+          setValue(o)
+        }}
+      /> */}
       <Select
+        searchable
+        multiple
+        options={options}
         title="Title"
         hintText="Select custom"
-        tabs={tabs}
-        onChange={() => {}}
+        value={value2}
+        onChange={(o) => {
+          setValue2(o);
+        }}
       />
-      <Select
+      {/* <Select
         disabled
         title="Title"
         hintText="Select custom"
         options={options}
         value={value2}
         onChange={(o) => setValue2(o)}
-      />
+      /> */}
     </div>
   );
 }

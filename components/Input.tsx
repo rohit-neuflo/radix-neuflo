@@ -2,9 +2,12 @@ import React, { useState, forwardRef } from "react";
 import { styled } from "../stitches.config";
 import { components } from "react-select";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: "text" | "password" | "number" | "email";
   error?: string;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   placeholder?: string;
   title?: string;
   hintText?: string;
@@ -13,6 +16,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   Size?: "md" | "lg" | "xl";
 }
 
+const LeftIconWrapper = styled("div", {});
+
 const InputBase = styled("input", {
   fontFamily: "Poppins",
   padding: "12px 16px",
@@ -20,6 +25,10 @@ const InputBase = styled("input", {
   borderRadius: "8px",
   width: "100%",
   border: "none",
+  boxSizing: "border-box",
+  [` ${LeftIconWrapper} ~ &`]: {
+    paddingLeft: "2rem",
+  },
   variants: {
     inputState: {
       error: {
@@ -51,6 +60,7 @@ const InputBase = styled("input", {
 const NumberInputContainer = styled("div", {
   position: "relative",
   display: "flex",
+  boxSizing: "border-box",
 });
 
 const NumberInputBase = styled("input", {
@@ -63,6 +73,7 @@ const InputContainer = styled("div", {
   margin: "0.25rem",
   position: "relative",
   width: "100%",
+  boxSizing: "border-box",
 });
 
 const Button = styled("button", {
@@ -98,10 +109,10 @@ const Title = styled("div", {
   lineHeight: "1.5rem",
   color: "$primary-body-text",
   marginBottom: "0.5rem",
-  variants:{
+  variants: {
     disabled: {
       true: {
-        opacity:"0.5",
+        opacity: "0.5",
       },
       false: {},
     },
@@ -138,7 +149,18 @@ const ArrowIcon = styled("span", {
 });
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { type, error, title, hintText, Size, ...restProps } = props;
+  const {
+    type,
+    error,
+    title,
+    hintText,
+    Size,
+    leftIcon,
+    rightIcon,
+    style,
+    className,
+    ...restProps
+  } = props;
   const state = error ? "error" : "normal";
   const [showPassword, setShowPassword] = useState(false);
   const [numberValue, setNumberValue] = useState<number | string>(0);
@@ -153,10 +175,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   return (
     <>
-      <InputContainer>
+      <InputContainer style={style} className={className}>
         {title && <Title>{title}</Title>}
         {type === "password" ? (
           <NumberInputContainer>
+            {leftIcon && (
+              <LeftIconWrapper
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0 8px",
+                }}
+              >
+                {leftIcon}
+              </LeftIconWrapper>
+            )}
             <InputBase
               ref={ref}
               type={showPassword ? "text" : "password"}
@@ -167,6 +202,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </NumberInputContainer>
         ) : type === "email" ? (
           <NumberInputContainer>
+            {leftIcon && (
+              <LeftIconWrapper
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0 8px",
+                }}
+              >
+                {leftIcon}
+              </LeftIconWrapper>
+            )}
             <InputBase
               ref={ref}
               type={type}
@@ -177,6 +225,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </NumberInputContainer>
         ) : type === "number" ? (
           <NumberInputContainer>
+            {leftIcon && (
+              <LeftIconWrapper
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0 8px",
+                }}
+              >
+                {leftIcon}
+              </LeftIconWrapper>
+            )}
             <NumberInputBase
               ref={ref}
               type="text"
@@ -248,6 +309,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           </NumberInputContainer>
         ) : (
           <NumberInputContainer>
+            {leftIcon && (
+              <LeftIconWrapper
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0 8px",
+                }}
+              >
+                {leftIcon}
+              </LeftIconWrapper>
+            )}
             <InputBase
               ref={ref}
               type={type}

@@ -1,191 +1,160 @@
+// Calendar.tsx
 import React, { useState } from "react";
-import Calendar from "react-calendar";
-import { styled } from "@stitches/react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronDown,
-  ChevronUp,
-} from "react-feather";
+import { DatePicker, ConfigProvider } from "antd";
+import dayjs from "dayjs";
+import { styled } from "../stitches.config";
+import "./datepicker.css";
 
-const DatePickerWrapper = styled("div", {
-  position: "relative",
-  display: "inline-block",
+const { RangePicker } = DatePicker;
+
+type RangeValue = [dayjs.Dayjs | null, dayjs.Dayjs | null] | null;
+
+const CustomRangePicker1 = styled(RangePicker, {
   fontFamily: "Poppins",
+  width: "50%",
 });
 
-const CalendarContainer = styled("div", {
-  position: "absolute",
-  zIndex: 1,
-  backgroundColor: "white",
-  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-  borderRadius: "4px",
-  padding: "16px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-});
+type CustomRangePickerProps = {
+  type: "a" | "s";
+};
 
-const CalendarHeader = styled("div", {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "100%",
-  marginBottom: "16px",
-});
+const CustomRangePicker = React.forwardRef<
+  React.ElementRef<typeof CustomRangePicker1>,
+  React.ComponentPropsWithoutRef<typeof CustomRangePicker1> &
+    CustomRangePickerProps
+>(({ type, ...props }, ref) => <CustomRangePicker1 ref={ref} {...props} />);
 
-const CalendarNavButton = styled("button", {
-  background: "none",
-  border: "none",
-  cursor: "pointer",
-  fontSize: "20px",
-  color: "#333",
-  outline: "none",
-});
+type CalendarProps = {
+  range?: boolean;
+};
 
-const MonthDropdown = styled("select", {
-  fontSize: "16px",
-  padding: "4px",
-  borderRadius: "4px",
-});
+const Calendar: React.FC<CalendarProps> = ({ range = false }) => {
+  const [dates, setDates] = useState<RangeValue>(null);
+  const [customRange, setCustomRange] = useState<string>("");
 
-const YearDropdown = styled("select", {
-  fontSize: "16px",
-  padding: "4px",
-  borderRadius: "4px",
-});
+  const handleCustomRangeChange = (value: string) => {
+    setCustomRange(value);
+    let startDate: dayjs.Dayjs | null = null;
+    let endDate: dayjs.Dayjs | null = null;
 
-type CalendarChangeType = Date | Date[] | null;
-
-const DatePicker: React.FC = () => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    new Date().getMonth()
-  );
-  const [selectedYear, setSelectedYear] = useState<number>(
-    new Date().getFullYear()
-  );
-
-  const toggleDatePicker = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleStartDateChange = (date: Date | Date[] | null) => {
-    if (Array.isArray(date)) {
-      setStartDate(date[0]);
-      setEndDate(date[1]);
-    } else {
-      setStartDate(date);
-      setEndDate(null);
-    }
-  };
-
-  const handleEndDateChange = (date: Date | Date[] | null) => {
-    if (Array.isArray(date)) {
-      setStartDate(date[0]);
-      setEndDate(date[1]);
-    } else {
-      setEndDate(date);
-    }
-  };
-
-  const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedMonthIndex = parseInt(event.target.value, 10);
-    setSelectedMonth(selectedMonthIndex);
-  };
-
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedYearValue = parseInt(event.target.value, 10);
-    setSelectedYear(selectedYearValue);
-  };
-
-  const generateMonthOptions = () => {
-    const monthOptions = [];
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    for (let i = 0; i < monthNames.length; i++) {
-      monthOptions.push(
-        <option key={i} value={i}>
-          {monthNames[i]}
-        </option>
-      );
+    switch (value) {
+      case "today":
+        startDate = dayjs().startOf("day");
+        endDate = dayjs().endOf("day");
+        break;
+      case "yesterday":
+        startDate = dayjs().subtract(1, "day").startOf("day");
+        endDate = dayjs().subtract(1, "day").endOf("day");
+        break;
+      case "thisWeek":
+        startDate = dayjs().startOf("week");
+        endDate = dayjs().endOf("week");
+        break;
+      case "lastWeek":
+        startDate = dayjs().subtract(1, "week").startOf("week");
+        endDate = dayjs().subtract(1, "week").endOf("week");
+        break;
+      case "thisMonth":
+        startDate = dayjs().startOf("month");
+        endDate = dayjs().endOf("month");
+        break;
+      case "lastMonth":
+        startDate = dayjs().subtract(1, "month").startOf("month");
+        endDate = dayjs().subtract(1, "month").endOf("month");
+        break;
+      default:
+        break;
     }
 
-    return monthOptions;
+    setDates([startDate, endDate]);
   };
 
-  const generateYearOptions = () => {
-    const yearOptions = [];
-    const currentYear = new Date().getFullYear();
+  const customRanges = [
+    { value: "today", label: "Today" },
+    { value: "yesterday", label: "Yesterday" },
+    { value: "thisWeek", label: "This Week" },
+    { value: "lastWeek", label: "Last Week" },
+    { value: "thisMonth", label: "This Month" },
+    { value: "lastMonth", label: "Last Month" },
+  ];
 
-    for (let i = currentYear - 10; i <= currentYear + 10; i++) {
-      yearOptions.push(
-        <option key={i} value={i}>
-          {i}
-        </option>
-      );
-    }
+  const [hoveredOption, setHoveredOption] = useState<string | null>(null);
 
-    return yearOptions;
+  const handleOptionMouseOver = (value: string | null) => {
+    setHoveredOption(value);
   };
 
   return (
-    <DatePickerWrapper>
-      <button onClick={toggleDatePicker}>Select Date Range</button>
-      {isOpen && (
-        <CalendarContainer>
-          <CalendarHeader>
-            <CalendarNavButton
-              onClick={() => setSelectedMonth(selectedMonth - 1)}
-            >
-              <ChevronLeft />
-            </CalendarNavButton>
-            <MonthDropdown onChange={handleMonthChange} value={selectedMonth}>
-              {generateMonthOptions()}
-            </MonthDropdown>
-            <YearDropdown onChange={handleYearChange} value={selectedYear}>
-              {generateYearOptions()}
-            </YearDropdown>
-            <CalendarNavButton
-              onClick={() => setSelectedMonth(selectedMonth + 1)}
-            >
-              <ChevronRight />
-            </CalendarNavButton>
-          </CalendarHeader>
-          {/* Type assertion for the onChange prop */}
-          <Calendar
-            selectRange
-            value={startDate && endDate ? [startDate, endDate] : startDate}
-            // Use the custom handlers and assert the type
-            onChange={handleStartDateChange as any}
-            view={"month"}
-            activeStartDate={new Date(selectedYear, selectedMonth, 1)}
-          />
-        </CalendarContainer>
+    <ConfigProvider
+      theme={{
+        components: {
+          DatePicker: {
+            fontFamily: "Poppins",
+            cellHeight: 40,
+            cellWidth: 40,
+            cellHoverBg: "#47aad41a",
+            cellHoverWithRangeBg: "#47aad42a",
+            cellActiveWithRangeBg: "#47aad41a",
+            hoverBorderColor: "#47aad41a",
+            cellRangeBorderColor: "none",
+          },
+        },
+      }}
+    >
+      {range ? (
+        <CustomRangePicker1
+          value={dates}
+          onChange={(val) => {
+            setCustomRange("");
+            setDates(val);
+          }}
+          popupClassName="createDateRangePicker"
+          format="YYYY-MM-DD MMMM"
+          renderExtraFooter={() => (
+            <div style={{ width: "fit-content" }}>
+              {customRanges.map((range) => (
+                <div
+                  key={range.value}
+                  onClick={() => handleCustomRangeChange(range.value)}
+                  className={`${
+                    customRange === range.value
+                      ? "custom-range-option selected"
+                      : "custom-range-option"
+                  }`}
+                  onMouseOver={() => handleOptionMouseOver(range.value)}
+                  onMouseOut={() => handleOptionMouseOver(null)}
+                  style={{
+                    width: "100px",
+                    paddingLeft: "10px",
+                    borderRadius: "8px",
+                    color: hoveredOption === range.value ? "#47aad4" : "black",
+                    background:
+                      hoveredOption === range.value
+                        ? "#47aad41a"
+                        : "transparent",
+                    cursor: "pointer",
+                  }}
+                >
+                  {range.label}
+                </div>
+              ))}
+            </div>
+          )}
+        />
+      ) : (
+        <DatePicker
+          onChange={(val) => {
+            setCustomRange("");
+            if (val) {
+              setDates([val.startOf("month"), null]); // Set the start of the month
+            }
+          }}
+          popupClassName="createDateRangePicker"
+          format="YYYY-MM-DD MMMM"
+        />
       )}
-      {startDate && (
-        <p>
-          Selected Date Range: {startDate.toLocaleDateString()} -{" "}
-          {endDate?.toLocaleDateString()}
-        </p>
-      )}
-    </DatePickerWrapper>
+    </ConfigProvider>
   );
 };
 
-export default DatePicker;
+export default Calendar;

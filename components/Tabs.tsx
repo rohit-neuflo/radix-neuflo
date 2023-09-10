@@ -85,8 +85,9 @@ const Tabs = styled(RadixTabs.Root, {
   display: "flex",
   flexDirection: "column",
   padding: "none",
-  width: "fit-content",
+  width: "100%",
   fontFamily: "Poppins",
+  boxSizing:"border-box",
   variants: {
     variant: {
       default: {
