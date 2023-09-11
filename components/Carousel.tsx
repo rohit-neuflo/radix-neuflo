@@ -3,12 +3,12 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { styled } from "@stitches/react";
-interface CustomCarouselProps {
+type CustomCarouselProps = {
   items: React.ReactNode[];
   perPage?: 1 | 2 | 3 | 4 | 5 | 6;
   padding?: "2xs" | "xs" | "sm" | "md" | "lg";
   variant?: "circle" | "rounded";
-}
+} & React.HTMLProps<HTMLDivElement>;
 
 const StyledButton = styled("button", {
   background: "$surfaceColor",
@@ -61,6 +61,8 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
   perPage,
   padding,
   variant = "circle",
+  style,
+  ...rest
 }) => {
   const paddingValues = {
     "2xs": "8px",
@@ -89,9 +91,10 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({
   };
 
   const carouselOptions = { ...defaultOptions };
+  const style1 = { ...style, height: "100%", marginTop: "1rem" };
 
   return (
-    <div style={{ height: "100%", marginTop: "1rem" }}>
+    <div style={style1}>
       <Splide hasTrack={false} options={carouselOptions}>
         <SplideTrack>
           {items.map((item, index) => (

@@ -33,9 +33,9 @@ const SidebarContent = styled("div", {
 const SidebarContainer = styled("div", {
   backgroundColor: "$background",
   width: "316px",
-  height: "100vh",
+  height: "100%",
   boxShadow: "$boxShadow$sm",
-  padding: "1rem 32px",
+  padding: "1.5rem 32px",
   display: "flex",
   flexDirection: "column",
   gap: "16px",
@@ -95,7 +95,10 @@ type Link = {
 };
 
 type SidebarProps = {
+  headerTitle?: string;
   links?: Link[];
+  // activeLink: number;
+  // handleLinkClick: (index:number) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 const contentShow = keyframes({
@@ -108,11 +111,19 @@ const contentHide = keyframes({
   "100%": { opacity: 0, transform: "translateX(-100%)" },
 });
 
-const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
+const Sidebar = ({
+  headerTitle,
+  children,
+  links,
+  style,
+  // activeLink,
+  // handleLinkClick,
+  ...rest
+}: SidebarProps) => {
   return (
-    <>
+    <div style={{ height: "100%" }}>
       <SidebarContainer
-        {...rest}
+        style={style}
         display={{
           "@xs": "none",
           "@sm": "none",
@@ -121,7 +132,7 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
           "@xl": "block",
         }}
       >
-        <Header title="Neuflo"></Header>
+        {headerTitle && <Header title={headerTitle}></Header>}
         <SidebarContent>
           {links ? (
             links.map((link, index) => (
@@ -131,8 +142,9 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
               </MenuLink>
             ))
           ) : (
-            <>{children}</>
+            <></>
           )}
+          {children && <>{children}</>}
         </SidebarContent>
       </SidebarContainer>
       <SideDrawerContainer
@@ -160,6 +172,7 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
               '&[data-state="closed"]': {
                 animation: `${contentHide} 300ms ease-in-out`,
               },
+              
               "@xs": { display: "block" },
               "@sm": { display: "block" },
               "@md": { display: "none" },
@@ -168,6 +181,7 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
             }}
           >
             <DrawerContent
+              style={style}
               css={{
                 height: "100%",
                 backgroundColor: "$background",
@@ -183,7 +197,7 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
                   <ChevronLeftIcon />
                 </Button>
               </DrawerTrigger>
-              <Header title="Neuflo"></Header>
+              {headerTitle && <Header title={headerTitle}></Header>}
               {links ? (
                 links.map((link, index) => (
                   <MenuLink key={index} href={link.route}>
@@ -192,8 +206,9 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
                   </MenuLink>
                 ))
               ) : (
-                <>{children}</>
+                <></>
               )}
+              {children && <>{children}</>}
             </DrawerContent>
           </DrawerContainer>
         </Drawer>
@@ -207,7 +222,7 @@ const Sidebar = ({ children, links, ...rest }: SidebarProps) => {
           <>{children}</>
         )}
       </SideDrawerContainer>
-    </>
+    </div>
   );
 };
 

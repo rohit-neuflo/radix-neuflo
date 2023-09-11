@@ -84,7 +84,7 @@ export default function Home() {
     </Button>,
   ];
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <Tabs defaultValue="1">
         <TabsList>
           <TabItem value="1">modal</TabItem>

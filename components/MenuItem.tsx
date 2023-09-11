@@ -9,6 +9,7 @@ export const MenuItem = styled("div", {
   gap: "8px",
   borderRadius: "8px",
   boxSizing: "border-box",
+  fontSize: "$sm",
   variants: {
     size: {
       md: {
@@ -52,6 +53,7 @@ export const MenuLink = styled(Link, {
   gap: "1rem",
   borderRadius: "8px",
   boxSizing: "border-box",
+  fontSize: "$sm",
   "&:active": {
     backgroundColor: "$secondary",
   },

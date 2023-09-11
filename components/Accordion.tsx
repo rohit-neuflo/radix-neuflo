@@ -148,7 +148,7 @@ const AccordionItem = styled(RadixAccordion.Item, {
         },
       },
       outside: {
-        [`& ${StyledContent}`]: {
+        [`& ${StyledContent}, ${StyledContentBody}`]: {
           backgroundColor: "transparent",
         },
       },
