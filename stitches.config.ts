@@ -89,9 +89,11 @@ export const { styled, css, theme, getCssText, keyframes, globalCss } =
       zIndices: {},
       transitions: {},
     },
-    // media: {
-    //   bp1: '(min-width: 640px)',
-    //   bp2: '(min-width: 768px)',
-    //   bp3: '(min-width: 1024px)',
-    // },
+    media: {
+      xs: '(320px <= width <480px)',
+      sm: '(480px <=width <768px)',
+      md: '(768px <= width <1024px)',
+      lg: '(1024px <=width <1201px)',
+      xl: '(1201px <=width)',
+    },
   });

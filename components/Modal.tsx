@@ -57,14 +57,19 @@ const RadixModalContainerStyles = {
   overflow: "none",
   display: "flex",
   flexDirection: "column",
-  gap: "",
-
-  "&:focus": { outline: "none" },
-  // "& > *": {
-  //   "&:not(:last-child)": {
-  //     borderBottom: "1px solid $border", // Adjust the color as needed
-  //   },
-  // },
+  minWidth:"fit-content",
+  '@xs':{
+    width:"300px"
+  },
+  '@sm':{
+    width:"450px"
+  },
+  '@md':{
+    width:"740px"
+  },
+  '@lg':{
+    width:"768px"
+  }
 };
 
 const ModalContentStyles = {

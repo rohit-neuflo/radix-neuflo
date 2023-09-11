@@ -1,10 +1,6 @@
 import React, { ReactNode } from "react";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import { styled, keyframes } from "../stitches.config";
-import "@fontsource/poppins/400.css";
-import "@fontsource/poppins/500.css";
-import "@fontsource/poppins/600.css";
-import "@fontsource/poppins/700.css";
 
 const overlayShow = keyframes({
   "0%": { opacity: 0 },
@@ -27,9 +23,9 @@ const RadixBannerContent = styled(AlertDialog.Content, {
   boxShadow:
     "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
   position: "fixed",
-  top: "15%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  // top: "15%",
+  // left: "50%",
+  // transform: "translate(-50%, -50%)",
   maxHeight: "85vh",
   animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
   "&:focus": { outline: "none" },
@@ -38,7 +34,43 @@ const RadixBannerContent = styled(AlertDialog.Content, {
   alignItems: "center",
   padding: "24px",
   borderRadius: "10px",
-  width: "768px",
+  // width: "768px",
+  minWidth:"fit-content",
+  '@xs':{
+    width:"fit-content",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    flexDirection:"column"
+  },
+  '@sm':{
+    width:"300px",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    flexDirection:"column"
+  },
+  '@md':{
+    width:"450px",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    flexDirection:"row"
+  },
+  '@lg':{
+    width:"728px",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    flexDirection:"row"
+  },
+  '@xl':{
+    width:"728px",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    flexDirection:"row"
+  }
 });
 
 const BannerTitle = styled(AlertDialog.Title, {
