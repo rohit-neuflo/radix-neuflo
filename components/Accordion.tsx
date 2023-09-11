@@ -114,7 +114,9 @@ const AccordionContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof StyledContent>
 >(({ className, children, ...props }, ref) => (
   <StyledContent ref={ref} {...props}>
-    <StyledContentBody>{children}</StyledContentBody>
+    <StyledContentBody>
+      {children}
+    </StyledContentBody>
   </StyledContent>
 ));
 AccordionContent.displayName = RadixAccordion.Content.displayName;
@@ -163,6 +165,11 @@ const Accordion = styled(RadixAccordion.Root, {
   width: "100%",
   fontFamily: "Poppins",
   fontSize: "$sm",
+  "&.sidebarAccordion":{
+    [`& ${StyledContentBody}`]:{
+      flexDirection:"column",
+    },
+  },
   variants: {
     size: {
       sm: {
@@ -197,4 +204,4 @@ const Accordion = styled(RadixAccordion.Root, {
   },
 });
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent,};

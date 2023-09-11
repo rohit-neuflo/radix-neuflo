@@ -5,7 +5,7 @@ import React from 'react'
 function Editable() {
   return (
     <div>
-     <EditableTitle initialTitle='Demo'/>
+     <EditableTitle initialTitle='Demo' size='lg'/>
     </div>
   )
 }

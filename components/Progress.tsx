@@ -3,12 +3,11 @@ import * as Progress from '@radix-ui/react-progress';
 import { styled } from '../stitches.config';
 
 type ProgressProps = {
-  size: 'md' | 'lg' | 'xl';
+  size: '6xs' | '5xs' | '4xs' | '3xs' | '2xs' ;
   value: number;
-  variant: 'linear' | 'circular';
 };
 
-const ProgressBar = ({ size, value, variant }: ProgressProps) => {
+const ProgressBar = ({ size, value }: ProgressProps) => {
   const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
@@ -17,14 +16,12 @@ const ProgressBar = ({ size, value, variant }: ProgressProps) => {
   }, [value]);
 
   return (
-    <ProgressRoot size={size} variant={variant}>
-      {variant === 'linear' ? (
+    <ProgressRoot size={size} >
+    
         <ProgressIndicator
           style={{ transform: `translateX(-${100 - progress}%)` }}
         />
-      ) : (
-        <CircularProgressIndicator />
-      )}
+     
     </ProgressRoot>
   );
 };
@@ -34,31 +31,36 @@ const ProgressRoot = styled(Progress.Root, {
   overflow: 'hidden',
   background: '$background',
   borderRadius: '99999px',
-
+  width: "214px",
   variants: {
     size: {
-      md: {
-        width: 300,
-        height: 25,
+      '6xs': {
+        height: "2px",
       },
-      lg: {
-        width: 400,
-        height: 35,
+      '5xs': {
+
+        height: "4px",
       },
-      xl: {
-        width: 500,
-        height: 45,
+      '4xs': {
+
+        height: "8px",
+
       },
-    },
-    variant: {
-      linear: {},
-      circular: {},
-    },
+      '3xs': {
+
+        height: "12px",
+
+      },
+      '2xs': {
+
+        height: "16px",
+
+      },
+    }
   },
 
   defaultVariants: {
-    size: 'md',
-    variant: 'linear',
+    size: '4xs',
   },
 });
 
@@ -67,16 +69,6 @@ const ProgressIndicator = styled(Progress.Indicator, {
   width: '100%',
   height: '100%',
   borderRadius: 'inherit',
-  transition: 'transform 660ms cubic-bezier(0.65, 0, 0.35, 1)',
-});
-
-const CircularProgressIndicator = styled(Progress.Indicator, {
-  width: '100%',
-  height: '100%',
-  borderRadius: '50%',
-  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-  transformOrigin: 'center',
-  transform: 'rotate(-90deg)',
   transition: 'transform 660ms cubic-bezier(0.65, 0, 0.35, 1)',
 });
 

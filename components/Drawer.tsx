@@ -57,8 +57,8 @@ const RadixDrawerContainerStyles = {
     "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
   position: "fixed",
   top: "0",
-  left: "70%",
-  width: "30%",
+  right: "0",
+  width: "400px",
   height: "100vh",
   //   animation: `${contentShow} 2s cubic-bezier(0.16, 1, 0.3, 1)`,
   '&[data-state="open"]': {
@@ -114,14 +114,30 @@ const Drawer = styled(Dialog.Root, {
   //   },
 });
 
-function DrawerContainer({ children }: { children: React.ReactNode }) {
-  return (
-    <DrawerPortal>
-      <DrawerOverlay />
-      <RadixDrawerContainer>{children}</RadixDrawerContainer>
-    </DrawerPortal>
-  );
-}
+const DrawerContainer = React.forwardRef<
+  React.ElementRef<typeof RadixDrawerContainer>,
+  React.ComponentPropsWithoutRef<typeof RadixDrawerContainer>
+>(({ children, ...props }, ref) => (
+  <DrawerPortal>
+    <DrawerOverlay />
+    <RadixDrawerContainer ref={ref} {...props}>
+      {children}
+    </RadixDrawerContainer>
+  </DrawerPortal>
+));
+// function DrawerContainer<RadixDrawerContainer>({
+//   children,
+//   ...props
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return (
+//     <DrawerPortal>
+//       <DrawerOverlay />
+//       <RadixDrawerContainer {...props}>{children}</RadixDrawerContainer>
+//     </DrawerPortal>
+//   );
+// }
 
 function DrawerHeader({ title }: { title?: string }) {
   function DialogClose() {
