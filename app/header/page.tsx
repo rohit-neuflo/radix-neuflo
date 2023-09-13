@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Bell, CaretLeft, X } from "@phosphor-icons/react";
-import { Header } from "@/components/Header";
+import { Header } from "@/src";
 import * as Dialog from "@radix-ui/react-dialog";
 
 function DialogClose() {

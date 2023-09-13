@@ -1,8 +1,6 @@
 "use client";
-import { Input } from "@/components/Input";
 import React from "react";
-import { Button } from "@/components/Button";
-import Calendar from "@/components/DatePicker";
+import { Button, Calendar, Input } from "@/src";
 
 function Form() {
   return (
@@ -30,8 +28,13 @@ function Form() {
         />
         <Input type="password" placeholder="Password Input" />
         <Input type="number" placeholder="Number Input" Size="md" />
-        <Input type="password" placeholder="Disabled Password Input" disabled/>
-        <Input type="number" error="does not match" placeholder="Number Input" Size="md" />
+        <Input type="password" placeholder="Disabled Password Input" disabled />
+        <Input
+          type="number"
+          error="does not match"
+          placeholder="Number Input"
+          Size="md"
+        />
         <Button variant="ghost">Submit</Button>
       </form>
     </div>

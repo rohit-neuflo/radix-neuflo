@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
-import Gauge from "@/components/Gauge"; // Adjust the import path
+import { Gauge } from "@/src"; // Adjust the import path
 
 const App = () => {
   const [percentage, setPercentage] = useState(0);
@@ -9,7 +9,7 @@ const App = () => {
     const interval = setInterval(() => {
       const randomPercentage = Math.floor(Math.random() * 101);
       setPercentage(randomPercentage);
-    }, 1000); 
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -20,7 +20,6 @@ const App = () => {
       <Gauge value={percentage} size="sm" />
       <Gauge value={percentage} size="md" />
       <Gauge value={percentage} size="lg" />
-
     </div>
   );
 };

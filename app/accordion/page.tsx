@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/Accordion";
+} from "@/src";
 import { CaretCircleDoubleDown } from "@phosphor-icons/react";
 function AccordionPage() {
   return (

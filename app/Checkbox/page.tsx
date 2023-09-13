@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Checkbox } from "../../components/Checkbox";
+import { Checkbox } from "@/src";
 
 
 function CheckboxPage() {

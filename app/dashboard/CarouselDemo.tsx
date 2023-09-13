@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import CustomCarousel from "../../components/Carousel";
-import { Button } from "@/components/Button";
+import { Button, Carousel } from "@/src";
 const items = [
   <div
     style={{
@@ -127,7 +126,7 @@ const buttons = [
 function CarouselDemo() {
   return (
     <div>
-      <CustomCarousel items={items} perPage={3} padding="2xs" />
+      <Carousel items={items} perPage={3} padding="2xs" />
       {/* <CustomCarousel
         style={{ width: "50%" }}
         items={buttons}

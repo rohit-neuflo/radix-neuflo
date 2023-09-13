@@ -1,20 +1,20 @@
 "use client";
 import React from "react";
-import { Sidebar } from "@/components/Sidebar";
-import { MenuLink } from "@/components/MenuItem";
 import {
+  Sidebar,
+  MenuLink,
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/Accordion";
+} from "@/src";
 
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const links = [
-    {icon:<MagnifyingGlassIcon/>, label: "home", route: "/" },
-    {icon:<MagnifyingGlassIcon/>, label: "about", route: "/sidebar"},
-    {icon:<MagnifyingGlassIcon/>, label: "main", route: "/button"},
+  { icon: <MagnifyingGlassIcon />, label: "home", route: "/" },
+  { icon: <MagnifyingGlassIcon />, label: "about", route: "/sidebar" },
+  { icon: <MagnifyingGlassIcon />, label: "main", route: "/button" },
 ];
 function SidebarPage() {
   return (

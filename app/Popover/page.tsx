@@ -7,9 +7,10 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverFooter,
-} from "@/components/Popover";
-import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
+  Button,
+  Input,
+} from "@/src";
+
 function PopoverPage() {
   return (
     <div>
@@ -28,7 +29,7 @@ function PopoverPage() {
                 justifyContent: "center",
               }}
             >
-              <Input type="text" placeholder="Enter your name"/>
+              <Input type="text" placeholder="Enter your name" />
               <Input type="number" />
             </form>
           </PopoverContent>

@@ -1,7 +1,6 @@
 "use client";
-import { Separation } from "@/components/Separator";
+import { Separation, Tabs, TabsList, TabItem, TabContent } from "@/src";
 import React from "react";
-import { Tabs, TabsList, TabItem, TabContent } from "../../components/Tabs";
 import AccordionPart from "./AccordionPart";
 import CarouselDemo from "./CarouselDemo";
 import Form from "./Form";
@@ -26,7 +25,7 @@ function DashboardHome() {
           <TabItem value="3">Carousel</TabItem>
           <TabItem value="4">Progress</TabItem>
         </TabsList>
-        <Separation/>
+        <Separation />
         <TabContent value="1">
           <AccordionPart />
         </TabContent>
@@ -37,7 +36,7 @@ function DashboardHome() {
           <CarouselDemo />
         </TabContent>
         <TabContent value="4">
-          <ProgressDemo/>
+          <ProgressDemo />
         </TabContent>
       </Tabs>
     </div>

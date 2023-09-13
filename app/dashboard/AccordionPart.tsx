@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/Accordion";
+} from "@/src";
 
 function AccordionPart() {
   return (

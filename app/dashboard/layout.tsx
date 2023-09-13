@@ -1,15 +1,14 @@
 "use client";
 import React from "react";
-import { Sidebar } from "@/components/Sidebar";
-import { HomeIcon, PlusIcon } from "@radix-ui/react-icons";
 import {
+  Sidebar,
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/Accordion";
-import { MenuLink } from "@/components/MenuItem";
-
+  MenuLink,
+} from "@/src";
+import { HomeIcon, PlusIcon } from "@radix-ui/react-icons";
 const links = [
   { icon: <HomeIcon />, label: "Home", route: "/dashboard" },
   {
