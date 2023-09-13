@@ -98,7 +98,7 @@ type SidebarProps = {
   headerTitle?: string;
   links?: Link[];
   // activeLink: number;
-  // handleLinkClick: (index:number) => void;
+  handleLinkClick: (routeName: string) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 const contentShow = keyframes({
@@ -117,7 +117,7 @@ const Sidebar = ({
   links,
   style,
   // activeLink,
-  // handleLinkClick,
+  handleLinkClick,
   ...rest
 }: SidebarProps) => {
   return (
@@ -172,7 +172,7 @@ const Sidebar = ({
               '&[data-state="closed"]': {
                 animation: `${contentHide} 300ms ease-in-out`,
               },
-              
+
               "@xs": { display: "block" },
               "@sm": { display: "block" },
               "@md": { display: "none" },
@@ -200,7 +200,11 @@ const Sidebar = ({
               {headerTitle && <Header title={headerTitle}></Header>}
               {links ? (
                 links.map((link, index) => (
-                  <MenuLink key={index} href={link.route}>
+                  <MenuLink
+                    key={index}
+                    href={link.route}
+                    onClick={() => handleLinkClick(link.route)}
+                  >
                     {link.icon && <IconWrapper>{link.icon}</IconWrapper>}
                     <span>{link.label}</span>
                   </MenuLink>
