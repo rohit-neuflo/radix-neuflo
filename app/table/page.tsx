@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from "react";
-import { Table } from "@/components/Table"; // Import your custom Table component
+import { Table } from "@/src"; // Import your custom Table component
 
 interface RowData {
   id: number;

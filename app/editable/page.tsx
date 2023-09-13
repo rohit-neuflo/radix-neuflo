@@ -1,13 +1,13 @@
-"use client"
-import EditableTitle from '@/components/EditableTitle'
-import React from 'react'
+"use client";
+import { EditableTitle } from "@/src";
+import React from "react";
 
 function Editable() {
   return (
     <div>
-     <EditableTitle initialTitle='Demo' size='lg'/>
+      <EditableTitle initialTitle="Demo" size="lg" />
     </div>
-  )
+  );
 }
 
-export default Editable
+export default Editable;

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Textarea } from "@/components/Textarea";
-import { Button } from "@/components/Button";
+
+import { Button, Textarea } from "@/src";
 function page() {
   return (
     <div>

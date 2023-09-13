@@ -1,7 +1,7 @@
 "use client";
-import { Input } from "@/components/Input";
+import { Input, Button } from "@/src";
 import * as React from "react";
-import { Button } from "@/components/Button";
+
 export default function InputPage() {
   const [input, setInput] = React.useState("demo");
   return (

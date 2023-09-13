@@ -7,9 +7,10 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
-} from "../../components/Modal";
-import { Button } from "../../components/Button";
-import { Input } from "@/components/Input";
+  Button,
+  Input,
+} from "@/src";
+
 function ModalPage() {
   return (
     <div>
@@ -31,23 +32,36 @@ function ModalPage() {
         <ModalContainer>
           <ModalHeader title="Title" />
           <ModalContent>
-          <form style={{display:'flex',flexDirection:'column',gap:'0.5rem', justifyContent:'center'}}>
-          <Input type="text" placeholder="Enter your name"/>
+            <form
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+                justifyContent: "center",
+              }}
+            >
+              <Input type="text" placeholder="Enter your name" />
               <Input type="number" />
             </form>
           </ModalContent>
           <ModalFooter
-    size="md"
-    variant="buttonLeftRight"
-    leftButtons={[
-      <Button variant="ghost" size="md">Label</Button>
-    ]}
-    rightButtons={[
-      <Button variant="stroke" size="md">Label</Button>,
-      <Button variant="primary" size="md">Label</Button>
-    ]}
-    divider
-  />
+            size="md"
+            variant="buttonLeftRight"
+            leftButtons={[
+              <Button variant="ghost" size="md">
+                Label
+              </Button>,
+            ]}
+            rightButtons={[
+              <Button variant="stroke" size="md">
+                Label
+              </Button>,
+              <Button variant="primary" size="md">
+                Label
+              </Button>,
+            ]}
+            divider
+          />
         </ModalContainer>
       </Modal>
     </div>

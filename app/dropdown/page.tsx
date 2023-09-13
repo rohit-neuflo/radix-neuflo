@@ -1,6 +1,4 @@
 "use client";
-import { Button } from "@/components/Button";
-import { Separation}  from "@/components/Separator";
 import React from "react";
 import {
   DropdownMenuPanel,
@@ -14,55 +12,60 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuItemIndicator,
   DropdownMenuRadioGroup,
-  DropdownMenuRadioItem
-} from "../../components/Dropdown";
-import SearchBar from "../../components/SearchBar";
+  DropdownMenuRadioItem,
+  Button,
+  Separation,
+  SearchBar,
+} from "@/src";
 
 export default function DropdownPage() {
-    const [item,setItem] = React.useState("List Item")
+  const [item, setItem] = React.useState("List Item");
   return (
-    
     <div>
-     <DropdownMenuRoot>
+      <DropdownMenuRoot>
         <DropdownMenuTrigger asChild>
-            <Button size="md">Click Me!</Button>
+          <Button size="md">Click Me!</Button>
         </DropdownMenuTrigger>
         <DropdownMenuPanel>
-            <DropdownMenuContent>
-                <DropdownMenuLabel>
-                    {/* <SearchBar/> */}
-                    <SearchBar/>
-                </DropdownMenuLabel>
-                <Separation/>
-                <DropdownMenuItem>List Item</DropdownMenuItem>
-                <DropdownMenuItem>List Item</DropdownMenuItem>
-                <DropdownMenuItem>List Item</DropdownMenuItem>
-            </DropdownMenuContent>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>
+              {/* <SearchBar/> */}
+              <SearchBar />
+            </DropdownMenuLabel>
+            <Separation />
+            <DropdownMenuItem>List Item</DropdownMenuItem>
+            <DropdownMenuItem>List Item</DropdownMenuItem>
+            <DropdownMenuItem>List Item</DropdownMenuItem>
+          </DropdownMenuContent>
         </DropdownMenuPanel>
-     </DropdownMenuRoot>
+      </DropdownMenuRoot>
 
-     
-     <DropdownMenuRoot>
-        <DropdownMenuTrigger asChild style={{
-            margin:"1rem"
-        }}>
-            <Button size="md">Click Me!</Button>
+      <DropdownMenuRoot>
+        <DropdownMenuTrigger
+          asChild
+          style={{
+            margin: "1rem",
+          }}
+        >
+          <Button size="md">Click Me!</Button>
         </DropdownMenuTrigger>
         <DropdownMenuPanel>
-            <DropdownMenuContent>
-                {/* <DropdownMenuLabel>Single Line Item</DropdownMenuLabel> */}
-                <DropdownMenuRadioGroup value={item} onValueChange={setItem}>
-                 <DropdownMenuRadioItem value={"List Item"}>
-                    List Item
-                    </DropdownMenuRadioItem>
-                 <DropdownMenuRadioItem value={"List Item"}>List Item</DropdownMenuRadioItem>
-                 <DropdownMenuRadioItem value={"List Item"}>List Item</DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
-               
-            </DropdownMenuContent>
+          <DropdownMenuContent>
+            {/* <DropdownMenuLabel>Single Line Item</DropdownMenuLabel> */}
+            <DropdownMenuRadioGroup value={item} onValueChange={setItem}>
+              <DropdownMenuRadioItem value={"List Item"}>
+                List Item
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value={"List Item"}>
+                List Item
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value={"List Item"}>
+                List Item
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
         </DropdownMenuPanel>
-     </DropdownMenuRoot>
-     </div>
-  
+      </DropdownMenuRoot>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "../../components/Button";
+import { Button } from "@/src";
 
 export default function ButtonPage() {
   return (

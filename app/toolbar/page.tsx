@@ -2,10 +2,8 @@
 
 import React from "react";
 
-import { Toolbar, ToolbarSeparator } from "../../components/Toolbar";
-import { ChipsGroup, Chip } from "@/components/Chips";
+import { ChipsGroup, Chip, Toolbar, ToolbarSeparator, Button } from "@/src";
 import { Lightbulb } from "@phosphor-icons/react";
-import { Button } from "@/components/Button";
 
 function ToolbarPage() {
   return (

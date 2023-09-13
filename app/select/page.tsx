@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Select, SelectOption, TabOption } from "@/components/Select";
+import { Select, SelectOption, TabOption } from "@/src";
 
 const options: SelectOption[] = [
   { label: "Chocolate", value: "chocolate" },

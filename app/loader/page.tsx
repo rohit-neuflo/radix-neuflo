@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Spinner } from "../../components/Loader";
+import { Spinner } from "@/src";
 function LoaderPage() {
   return (
     <div>

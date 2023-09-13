@@ -1,11 +1,11 @@
-import React from 'react'
-import { MenuItem } from '@/components/MenuItem'
+import React from "react";
+import { MenuItem } from "@/src";
 function MenuItemPage() {
   return (
     <div>
-        <MenuItem/>
+      <MenuItem />
     </div>
-  )
+  );
 }
 
-export default MenuItemPage
+export default MenuItemPage;

@@ -1,7 +1,7 @@
 "use client";
-import CustomCarousel from "../../components/Carousel";
-import { Button } from "@/components/Button";
-import { Label } from "@/components/Label";
+
+import { Button, Carousel, Label } from "@/src";
+
 const CarouselPage: React.FC = () => {
   const items = [
     <div
@@ -54,7 +54,7 @@ const CarouselPage: React.FC = () => {
   return (
     <div className="App">
       {/* <Label>Custom Carousel</Label> */}
-      <CustomCarousel items={items} perPage={3} padding="lg" />
+      <Carousel items={items} perPage={3} padding="lg" />
     </div>
   );
 };

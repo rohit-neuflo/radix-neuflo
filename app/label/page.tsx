@@ -1,7 +1,7 @@
 "use client";
 import { Lightbulb } from "@phosphor-icons/react";
 import React from "react";
-import { Label } from "../../components/Label";
+import { Label } from "@/src";
 
 function LabelPage() {
   return (

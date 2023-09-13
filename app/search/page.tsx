@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchBar } from "@/src";
 
 function SearchPage() {
   const [value, setValue] = useState<number | string>("");

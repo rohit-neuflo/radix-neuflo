@@ -1,24 +1,25 @@
 "use client";
 import React from "react";
-import { Tooltip } from "../../components/Tooltip";
-import { Button } from "../../components/Button";
 import {
+  Tooltip,
+  Button,
   Modal,
   ModalTrigger,
   ModalContainer,
   ModalContent,
   ModalHeader,
   ModalFooter,
-} from "../../components/Modal";
-import { Input } from "@/components/Input";
+  Input,
+} from "@/src";
+
 function TooltipPage() {
   return (
     <div>
       <Modal>
         <Tooltip side="right" content="Tooltip content">
-        <ModalTrigger asChild>
+          <ModalTrigger asChild>
             <Button>Tooltip trigger</Button>
-        </ModalTrigger>
+          </ModalTrigger>
         </Tooltip>
         <ModalContainer>
           <ModalHeader title="Title" />

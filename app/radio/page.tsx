@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { RadioGroup, Radio } from "../../components/Radio";
+import { RadioGroup, Radio } from "@/src";
 
 export default function RadioPage() {
   return (

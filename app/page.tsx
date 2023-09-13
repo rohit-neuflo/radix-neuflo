@@ -1,62 +1,57 @@
 "use client";
-import Image from "next/image";
 import React from "react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "../components/Accordion";
-import { Switch } from "../components/Switch";
-import { ChipsGroup, Chip } from "@/components/Chips";
-import {
-  Banner,
-  BannerTrigger,
-  BannerContent,
-  BannerCancel,
-} from "@/components/Banner";
+
 import {
   CaretCircleDoubleDown,
   Lightbulb,
   CaretLeft,
   Bell,
 } from "@phosphor-icons/react";
-import { Header } from "@/components/Header";
-import AuthInput from "@/components/AuthInput";
-import { Tabs, TabsList, TabItem, TabContent } from "../components/Tabs";
-import { Button } from "@/components/Button";
 import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  Switch,
+  ChipsGroup,
+  Chip,
+  Banner,
+  BannerTrigger,
+  BannerContent,
+  BannerCancel,
+  Header,
+  AuthInput,
+  Tabs,
+  TabsList,
+  TabItem,
+  TabContent,
   Modal,
   ModalTrigger,
   ModalContainer,
   ModalContent,
   ModalHeader,
   ModalFooter,
-} from "../components/Modal";
-import {
   Drawer,
   DrawerTrigger,
   DrawerContainer,
   DrawerContent,
   DrawerHeader,
   DrawerFooter,
-} from "../components/Drawer";
-import {
+  Button,
   Snackbar,
   SnackbarProvider,
   SnackbarAction,
-} from "@/components/Snackbar";
-import { Input } from "@/components/Input";
-import {
+  Input,
   Popover,
   PopoverContainer,
   PopoverHeader,
   PopoverTrigger,
   PopoverContent,
   PopoverFooter,
-} from "@/components/Popover";
-import { Spinner } from "../components/Loader";
-import { Footer } from "@/components/Footer";
+  Spinner,
+  Footer,
+} from "@/src";
+
 export default function Home() {
   const handleBellClick = () => {
     console.log("Bell icon clicked!");

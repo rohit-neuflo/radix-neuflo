@@ -1,5 +1,5 @@
 "use client";
-import { Tabs, TabsList, TabItem, TabContent } from "../../components/Tabs";
+import { Tabs, TabsList, TabItem, TabContent } from "@/src";
 import { Lightbulb } from "@phosphor-icons/react";
 
 import React from "react";
@@ -32,14 +32,14 @@ function TabsPage() {
         <TabContent value="3">content 3</TabContent>
         <TabContent value="4">content 4</TabContent>
       </Tabs>
-      
+
       <Tabs defaultValue="1" size="sm">
         <TabsList>
-          <TabItem value="1" >
+          <TabItem value="1">
             <Lightbulb />
             $link
           </TabItem>
-          <TabItem value="2" >
+          <TabItem value="2">
             {/* <Lightbulb /> */}
             $link
             {/* <Lightbulb /> */}

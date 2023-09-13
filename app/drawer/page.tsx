@@ -7,9 +7,10 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerFooter,
-} from "../../components/Drawer";
-import { Button } from "../../components/Button";
-import { Input } from "@/components/Input";
+  Button,
+  Input,
+} from "@/src";
+
 function DrawerPage() {
   return (
     <div>
@@ -18,7 +19,7 @@ function DrawerPage() {
           <Button>open drawer</Button>
         </DrawerTrigger>
         <DrawerContainer>
-          <DrawerHeader title="Title"/>
+          <DrawerHeader title="Title" />
           <DrawerContent>
             <form
               style={{
