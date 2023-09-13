@@ -11,7 +11,7 @@ import {
 import { MenuLink } from "@/components/MenuItem";
 
 const links = [
-  { icon: <HomeIcon />, label: "Home", route: "/dashboard/" },
+  { icon: <HomeIcon />, label: "Home", route: "/dashboard" },
   {
     icon: <PlusIcon />,
     label: "More Components",
@@ -23,11 +23,11 @@ const links = [
 ];
 
 function Dashboard({ children }: { children: React.ReactNode }) {
-  // const [activeLink, setActiveLink] = React.useState(1);
+  const [activeLink, setActiveLink] = React.useState("/");
 
-  // const handleLinkClick = (index:number) => {
-  //   setActiveLink(index);
-  // };
+  const handleLinkClick = (routeName: string) => {
+    setActiveLink(routeName);
+  };
   return (
     <div
       style={{
@@ -37,12 +37,21 @@ function Dashboard({ children }: { children: React.ReactNode }) {
         height: "100%",
       }}
     >
-      <Sidebar headerTitle="neuflo" links={links}>
+      <Sidebar
+        headerTitle="neuflo"
+        links={links}
+        handleLinkClick={handleLinkClick}
+      >
         <Accordion type="multiple" className="sidebarAccordion">
           <AccordionItem value="1" content="outside">
             <AccordionTrigger>Accordion Item 1</AccordionTrigger>
             <AccordionContent>
-              <MenuLink href="/dashboard/">Link 1</MenuLink>
+              <MenuLink
+                href="/dashboard"
+                onClick={() => handleLinkClick("/dashboard")}
+              >
+                Link 1
+              </MenuLink>
             </AccordionContent>
           </AccordionItem>
         </Accordion>
